@@ -1,0 +1,33 @@
+<main class="flex items-center justify-between">
+  <section class="flex flex-col w-1/2">
+    <div class="text-start m-auto w-1/2">
+      <h3 class="text-blue-medio text-[48px] font-extrabold">Universidad</h3>
+      <h2 class="text-blue-medio-strong text-[37px] font-bold">
+        Aplicacion de biblioteca
+      </h2>
+    </div>
+
+    <form action="" class="flex flex-col mt-[120px] gap-10 w-1/2 m-auto">
+      <input
+        type="text"
+        placeholder="Correo"
+        class="border-b-2 border-b-blue-strong placeholder:text-blue-medio text-sm outline-none text-blue-medio font-bold p-1"
+      />
+      <input
+        type="password"
+        placeholder="Contraseña"
+        class="border-b-2 border-blue-strong placeholder:text-blue-medio text-sm outline-none text-blue-medio font-bold p-1"
+      />
+      <button
+        type="submit"
+        class="bg-blue-medio-strong text-blue-white font-extrabold p-2 rounded-lg hover:bg-blue-medio"
+      >
+        Ingresar
+      </button>
+      <p class="text-blue-medio hover:cursor-pointer">¿Olvidaste tu contraseña?</p>
+    </form>
+  </section>
+  <section class="w-1/2">
+    <img [src]="imgUrl" alt="image" class="h-screen w-full" />
+  </section>
+</main>
