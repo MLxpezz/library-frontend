@@ -1,0 +1,36 @@
+<header class="w-4/5 flex items-center justify-between m-auto mt-16 flex-wrap">
+  <h1 class="text-4xl text-primary-color">Sistema Bibliotecario</h1>
+  <nav class="flex items-center w-[550px] relative">
+    <input
+      class="w-full border-2 border-blue-white p-1 pl-3 rounded-xl placeholder:p-1 placeholder:text-primary-color outline-none text-primary-color"
+      type="text"
+      placeholder="Buscar..."
+    />
+    <div
+      class="absolute bg-blue-white w-[190px] h-full rounded-xl right-0 flex items-center justify-center"
+    >
+      <div class="w-[60%] h-full flex items-center gap-[35px]">
+        <p class="text-primary-color">Alumnos</p>
+        <div class="h-[55%] bg-primary-color w-[2px]"></div>
+      </div>
+    </div>
+    <img
+      class="absolute right-0 mr-4 hover:cursor-pointer"
+      [src]="searchButton"
+      alt="search"
+    />
+  </nav>
+  <div class="flex gap-[40px]">
+    <button
+      class="w-[150px] bg-primary-color text-blue-white font-bold p-1 rounded-[10px]"
+    >
+      Mi cuenta
+    </button>
+    <button
+      class="w-[150px] bg-white border-2 border-blue-white text-primary-color font-bold rounded-[10px] p-1"
+    >
+      Cerrar sesion
+    </button>
+  </div>
+  <hr class="border border-blue-white w-full mt-9" />
+</header>
