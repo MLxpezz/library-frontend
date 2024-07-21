@@ -1,0 +1,70 @@
+<main class="w-4/5 m-auto mt-10">
+  <section class="w-full flex items-center justify-between">
+    <h2 class="text-[36px] text-blue-medio">Estudiantes</h2>
+    <div class="flex gap-9">
+      <div class="w-[548px] relative">
+        <input
+          type="text"
+          placeholder="Nombre del estudiante..."
+          class="w-[548px] border-2 border-blue-white p-1 pl-3 rounded-xl placeholder:p-1 placeholder:text-primary-color outline-none text-primary-color"
+        />
+        <div
+          class="absolute bg-blue-white w-[80px] h-full rounded-xl right-0 top-0 flex items-center justify-center"
+        >
+          <img
+            class="hover:cursor-pointer"
+            src="assets/icons8-search-book-48 1.png"
+            alt="search"
+          />
+        </div>
+      </div>
+      <button
+        class="w-[150px] bg-primary-color text-blue-white font-bold p-1 rounded-[10px] hover:bg-white hover:border-2 hover:border-blue-white hover:text-primary-color ml-[124px]"
+      >
+        Registrar Alumno
+      </button>
+      <button
+        class="w-[150px] bg-primary-color text-blue-white font-bold p-1 rounded-[10px] hover:bg-white hover:border-2 hover:border-blue-white hover:text-primary-color"
+      >
+        Volver
+      </button>
+    </div>
+  </section>
+  <section class="mt-10 w-full">
+    <table class="w-full flex flex-col border-collapse">
+      <thead class="">
+        <tr class="flex justify-start gap-[90px] text-blue-strong p-5">
+          <th class="">ID</th>
+          <th class="mr-[65px]">Nombre</th>
+          <th class="mr-[15px]">Matricula</th>
+          <th class="mr-[45px]">Telefono</th>
+          <th class="mr-[40px]">Direccion</th>
+          <th class="left-4">Devoluciones pendientes</th>
+          <th class="ml-[20px] mr-[55px]">Deuda</th>
+          <th class="mr-[15px]">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="text-primary-color flex flex-col gap-5 mt-6">
+        @for(student of listStudents; track student.id) {
+        <tr
+          class="w-full border-2 border-blue-white rounded-lg p-5 flex justify-start items-center gap-[80px]"
+        >
+          <td class="">{{student.id}}</td>
+          <td class="w-auto text-nowrap">{{student.name}}</td>
+          <td class="">{{student.enrollment}}</td>
+          <td class="">{{student.phone}}</td>
+          <td class="w-[12%] mr-[10px]">
+            {{student.address}}
+          </td>
+          <td class="mr-[50px]">{{student.pendingReturns}}</td>
+          <td class="mr-[45px]">${{student.debt}}</td>
+          <td class="flex gap-4">
+            <img src="assets/delete.png" alt="" />
+            <img src="assets/edit.png" alt="" />
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+</main>
