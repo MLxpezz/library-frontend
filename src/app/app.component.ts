@@ -17,7 +17,7 @@ export class AppComponent {
   searchButton: string = "assets/icons8-search-book-48 1.png";
 
   shouldShowHeader(): boolean {
-    const noHeaderRoutes = ["/login"];
+    const noHeaderRoutes = ["/login", "/register"];
     return !noHeaderRoutes.includes(this.router.url);
   }
 }

@@ -15,23 +15,28 @@ export class DashboardComponent {
   listCardsInfo: Array<any> = [
     {
       areaName: "Inventario",
-      imgUrl: "/assets/inventory.png"
+      imgUrl: "assets/inventory.png",
+      pageUrl: ""
     },
     {
       areaName: "Alumnos",
-      imgUrl: "/assets/student.png"
+      imgUrl: "/assets/student.png",
+      pageUrl: "/dashboard/students"
     },
     {
       areaName: "Devoluciones pendientes",
-      imgUrl: "/assets/book.png"
+      imgUrl: "assets/book.png",
+      pageUrl: ""
     },
     {
       areaName: "Prestamos",
-      imgUrl: "/assets/inventory.png"
+      imgUrl: "assets/inventory.png",
+      pageUrl: ""
     },
     {
       areaName: "Administrativos",
-      imgUrl: "/assets/teacher.png"
+      imgUrl: "assets/teacher.png",
+      pageUrl: ""
     }
   ];
 

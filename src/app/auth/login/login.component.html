@@ -51,7 +51,7 @@
       </p>
     </form>
   </section>
-  <section class="w-1/2">
-    <img src="{{imgUrl}}" alt="image" class="h-screen w-full"/>
+  <section class="w-1/2 h-screen relative">
+    <img [ngSrc]="imgUrl" alt="image" class="h-screen w-full" fill priority/>
   </section>
 </main>

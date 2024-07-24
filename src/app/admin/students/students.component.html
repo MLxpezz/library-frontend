@@ -6,7 +6,7 @@
         <input
           type="text"
           placeholder="Nombre del estudiante..."
-          class="w-[548px] border-2 border-blue-white p-1 pl-3 rounded-xl placeholder:p-1 placeholder:text-primary-color outline-none text-primary-color"
+          class="w-[548px] h-full border-2 border-blue-white p-1 pl-3 rounded-xl placeholder:p-1 placeholder:text-primary-color outline-none text-primary-color"
         />
         <div
           class="absolute bg-blue-white w-[80px] h-full rounded-xl right-0 top-0 flex items-center justify-center"
@@ -19,45 +19,49 @@
         </div>
       </div>
       <button
-        class="w-[150px] bg-primary-color text-blue-white font-bold p-1 rounded-[10px] hover:bg-white hover:border-2 hover:border-blue-white hover:text-primary-color ml-[124px]"
+        class="flex items-center justify-center gap-[5px] w-auto bg-primary-color text-blue-white font-bold p-1 pr-2 pl-2 rounded-[10px] border border-blue-medio hover:bg-white hover:text-primary-color"
+        (click)="openModal()"
       >
         Registrar Alumno
+        <img class="" src="/assets/studentsAdd.png" alt="add" />
       </button>
-      <button
-        class="w-[150px] bg-primary-color text-blue-white font-bold p-1 rounded-[10px] hover:bg-white hover:border-2 hover:border-blue-white hover:text-primary-color"
-      >
-        Volver
-      </button>
+      <a routerLink="/dashboard">
+        <button
+          class="flex items-center justify-center w-[150px] h-full bg-primary-color text-blue-white font-bold p-1 rounded-[10px] hover:bg-white hover:border hover:border-blue-medio hover:text-primary-color"
+        >
+          Volver
+          <img src="/assets/return.png" alt="" />
+        </button>
+      </a>
     </div>
   </section>
+  @if(students$ | async; as resultObject) { @if(resultObject.length > 0) {
   <section class="mt-10 w-full">
-    <table class="w-full flex flex-col border-collapse">
+    <table class="w-full border-collapse">
       <thead class="">
-        <tr class="flex justify-start gap-[90px] text-blue-strong p-5">
+        <tr class="flex justify-between items-center text-blue-strong pr-5 pl-5">
           <th class="">ID</th>
-          <th class="mr-[65px]">Nombre</th>
-          <th class="mr-[15px]">Matricula</th>
-          <th class="mr-[45px]">Telefono</th>
-          <th class="mr-[40px]">Direccion</th>
-          <th class="left-4">Devoluciones pendientes</th>
-          <th class="ml-[20px] mr-[55px]">Deuda</th>
-          <th class="mr-[15px]">Acciones</th>
+          <th class="">Nombre</th>
+          <th class="">Matricula</th>
+          <th class="">Telefono</th>
+          <th class="">Direccion</th>
+          <th class="">Prestamos actuales</th>
+          <th class="">Acciones</th>
         </tr>
       </thead>
-      <tbody class="text-primary-color flex flex-col gap-5 mt-6">
-        @for(student of listStudents; track student.id) {
+      <tbody class="flex flex-col gap-[20px] mt-10">
+        @for(student of resultObject; track student.id) {
         <tr
-          class="w-full border-2 border-blue-white rounded-lg p-5 flex justify-start items-center gap-[80px]"
+          class="w-full border-2 border-blue-white rounded-lg p-5 flex  items-center text-primary-color"
         >
-          <td class="">{{student.id}}</td>
-          <td class="w-auto text-nowrap">{{student.name}}</td>
-          <td class="">{{student.enrollment}}</td>
-          <td class="">{{student.phone}}</td>
-          <td class="w-[12%] mr-[10px]">
-            {{student.address}}
+          <td class="mr-[115px]">{{ student.id }}</td>
+          <td class="text-nowrap mr-[110px]">{{ student.name }} {{ student.lastname }}</td>
+          <td class="mr-[170px]">{{ student.enrollmentNumber }}</td>
+          <td class="mr-[100px]">{{ student.phone }}</td>
+          <td class="mr-[115px] w-[17%] text-wrap">
+            {{ student.address }}
           </td>
-          <td class="mr-[50px]">{{student.pendingReturns}}</td>
-          <td class="mr-[45px]">${{student.debt}}</td>
+          <td class="mr-[190px]">{{ student.countLoans }}</td>
           <td class="flex gap-4">
             <img src="assets/delete.png" alt="" />
             <img src="assets/edit.png" alt="" />
@@ -67,4 +71,6 @@
       </tbody>
     </table>
   </section>
+  } }
+  <app-modal [showModal]="showModal" (close)="closeModal()"/>
 </main>
