@@ -13,6 +13,11 @@
       action=""
       class="flex flex-col mt-[120px] gap-5 w-1/2 m-auto"
     >
+      @if(badCredentials) {
+      <p class="text-red-600 p-0 m-0 text-[16px] text-center">
+        Credenciales invalidas o la cuenta no existe.
+      </p>
+      }
       <div class="w-full">
         <input
           type="text"
@@ -21,9 +26,7 @@
           formControlName="email"
         />
         @if(email.hasError('required') && email.touched) {
-          <p class="text-red-600 p-0 m-0">
-            El campo email es requerido.
-          </p>
+        <p class="text-red-600 p-0 m-0">El campo email es requerido.</p>
         }
       </div>
       <div class="w-full">
@@ -34,9 +37,7 @@
           formControlName="password"
         />
         @if(password.hasError('required') && password.touched) {
-          <p class="text-red-600 p-0 m-0">
-            El campo contraseña es requerido.
-          </p>
+        <p class="text-red-600 p-0 m-0">El campo contraseña es requerido.</p>
         }
       </div>
       <button
@@ -52,6 +53,6 @@
     </form>
   </section>
   <section class="w-1/2 h-screen relative">
-    <img [ngSrc]="imgUrl" alt="image" class="h-screen w-full" fill priority/>
+    <img [ngSrc]="imgUrl" alt="image" class="h-screen w-full" fill priority />
   </section>
 </main>

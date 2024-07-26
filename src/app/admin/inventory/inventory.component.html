@@ -11,11 +11,7 @@
         <div
           class="absolute bg-blue-white w-[80px] h-full rounded-xl right-0 top-0 flex items-center justify-center"
         >
-          <img
-            class="hover:cursor-pointer"
-            [src]="searchButton"
-            alt="search"
-          />
+          <img class="hover:cursor-pointer" [src]="searchButton" alt="search" />
         </div>
       </div>
       <button
@@ -23,11 +19,14 @@
       >
         Añadir libro
       </button>
-      <button
-        class="w-[150px] bg-primary-color text-blue-white font-bold p-1 rounded-[10px] hover:bg-white hover:border-2 hover:border-blue-white hover:text-primary-color"
-      >
-        Volver
-      </button>
+      <a routerLink="/dashboard">
+        <button
+          class="flex items-center justify-center w-[150px] h-full bg-primary-color text-blue-white font-bold p-1 rounded-[10px] hover:bg-white hover:border hover:border-blue-medio hover:text-primary-color"
+        >
+          Volver
+          <img src="/assets/return.png" alt="" />
+        </button>
+      </a>
     </div>
   </section>
   <section

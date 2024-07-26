@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
 import { Login, LoginResponse } from '../../../interfaces/Login';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { Register } from '../../../interfaces/register';
 
 @Injectable({
@@ -16,9 +16,11 @@ export class UserService {
       map((response) => {
         if(response.isSuccess) {
           localStorage.setItem("token", response.token);
-          localStorage.setItem("expiration", response.expiration);
         }
         return response;
+      }),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => new Error(error.type.toString()))
       })
     );
   }

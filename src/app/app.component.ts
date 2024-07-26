@@ -1,23 +1,15 @@
 import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
+import { LoaderComponent } from './admin/components/loader/loader.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgIf, ReactiveFormsModule],
+  imports: [RouterOutlet, NgIf, ReactiveFormsModule, LoaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-
-  constructor(private router: Router) {}
-
-  searchButton: string = "assets/icons8-search-book-48 1.png";
-
-  shouldShowHeader(): boolean {
-    const noHeaderRoutes = ["/login", "/register"];
-    return !noHeaderRoutes.includes(this.router.url);
-  }
 }

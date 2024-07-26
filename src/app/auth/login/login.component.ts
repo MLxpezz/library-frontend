@@ -22,10 +22,11 @@ export class LoginComponent {
   private userService: UserService = inject(UserService);
   private router = inject(Router);
   imgUrl: string = 'assets/Designer.jpeg';
+  badCredentials: boolean = false;
 
   loginForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', Validators.required),
+    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
   });
 
   get email() {
@@ -46,7 +47,12 @@ export class LoginComponent {
       next: data => {
         if(data.isSuccess) {
           this.router.navigate(["/dashboard"]);
+          this.badCredentials = false;
         }
+      },
+      error: error => {
+        console.error("Fallo en el inicio de sesion", error.message);
+        this.badCredentials = true;
       }
     })
 

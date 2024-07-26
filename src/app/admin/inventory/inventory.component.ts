@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CardInventoryComponent } from '../components/card-inventory/card-inventory.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-inventory',
   standalone: true,
-  imports: [CardInventoryComponent],
+  imports: [CardInventoryComponent, RouterLink],
   templateUrl: './inventory.component.html',
   styleUrl: './inventory.component.css'
 })
