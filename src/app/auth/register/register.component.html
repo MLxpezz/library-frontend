@@ -1,1 +1,12 @@
-<p>register works!</p>
+<main class="flex items-center justify-between relative">
+  <section class="w-1/2 h-screen relative">
+    <img [ngSrc]="imgUrl" alt="image" class="h-screen w-full" fill priority />
+  </section>
+  <section class="flex flex-col w-1/2 relative">
+    <div class="text-start m-auto w-1/2">
+      <h2 class="text-blue-medio-strong text-[37px] font-bold">Nueva cuenta</h2>
+    </div>
+
+    <app-auth-form submitButtonText="Crear cuenta"/>
+  </section>
+</main>

@@ -1,71 +1,15 @@
-import { AsyncPipe, NgIf, NgOptimizedImage } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { UserService } from '../../core/services/userService/user-service.service';
-import { Login } from '../../interfaces/Login';
-import { Router } from '@angular/router';
-import { Register } from '../../interfaces/register';
+import { AsyncPipe, NgOptimizedImage } from '@angular/common';
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { AuthFormComponent } from '../../components/authForm/auth-form/auth-form.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, AsyncPipe, NgOptimizedImage],
+  imports: [AsyncPipe, NgOptimizedImage, RouterLink, AuthFormComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  private userService: UserService = inject(UserService);
-  private router = inject(Router);
   imgUrl: string = 'assets/Designer.jpeg';
-  badCredentials: boolean = false;
-
-  loginForm: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
-  });
-
-  get email() {
-    return this.loginForm.controls['email'];
-  }
-
-  get password() {
-    return this.loginForm.controls['password'];
-  }
-
-  onSubmit() {
-    const userData: Login = {
-      email: this.email.value,
-      password: this.password.value,
-    };
-
-    this.userService.userLogin(userData).subscribe({
-      next: data => {
-        if(data.isSuccess) {
-          this.router.navigate(["/dashboard"]);
-          this.badCredentials = false;
-        }
-      },
-      error: error => {
-        console.error("Fallo en el inicio de sesion", error.message);
-        this.badCredentials = true;
-      }
-    })
-
-    // const userData: Register = {
-    //   email: this.email.value,
-    //   password: this.password.value,
-    // };
-
-
-    // this.userService.userRegister(userData).subscribe({
-    //   next: data => {
-    //     console.log(data);
-    //   }
-    // })
-  }
 }

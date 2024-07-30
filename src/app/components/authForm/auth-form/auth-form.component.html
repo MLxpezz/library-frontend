@@ -1,0 +1,61 @@
+<form
+  [formGroup]="authForm"
+  (ngSubmit)="onSubmit()"
+  action=""
+  class="flex flex-col mt-[110px] gap-5 w-1/2 m-auto"
+>
+  @if(badCredentials) {
+  <p class="text-red-600 p-0 m-0 text-[16px]">
+    Credenciales invalidas o la cuenta no existe.
+  </p>
+  }
+  @if(emailIsAlreadyExists) {
+    <p class="text-red-500 p-0 m-0 text-[16px]">
+        El correo ya existe.
+    </p>
+  }
+  <div class="w-full">
+    <input
+      type="text"
+      placeholder="Correo"
+      class="w-full border-b-2 border-b-blue-strong placeholder:text-blue-medio text-sm outline-none text-blue-medio font-bold p-1 mb-2"
+      formControlName="email"
+    />
+    @if(email.hasError('required') && email.touched) {
+    <p class="text-red-600 p-0 m-0">El campo email es requerido.</p>
+    } @if(email.hasError('email') && !isLoginRoute()) {
+    <p class="text-red-600 p-0 m-0">El correo no es valido.</p>
+    }
+  </div>
+  <div class="w-full">
+    <input
+      type="password"
+      placeholder="Contraseña"
+      class="w-full border-b-2 border-blue-strong placeholder:text-blue-medio text-sm outline-none text-blue-medio font-bold p-1 mb-2"
+      formControlName="password"
+    />
+    @if(password.hasError('required') && password.touched) {
+    <p class="text-red-600 p-0 m-0">El campo contraseña es requerido.</p>
+    } @if(password.hasError('minlength') && !isLoginRoute()) {
+    <p class="text-red-600 p-0 m-0">
+      El campo contraseña debe tener un minimo de 8 caracteres.
+    </p>
+    }
+  </div>
+  <button
+    type="submit"
+    class="bg-blue-medio-strong text-blue-white font-extrabold p-2 rounded-lg hover:bg-blue-medio hover:cursor-pointer"
+    [disabled]="!authForm.valid"
+  >
+    {{ submitButtonText }}
+  </button>
+  @if(isLoginRoute()) {
+    <p class="text-blue-medio hover:cursor-pointer">¿Olvidaste tu contraseña?</p>
+  }
+  @if(!isLoginRoute()) {
+  <p class="text-blue-medio">
+    ¿Ya tienes cuenta?,
+    <a routerLink="/login" class="font-extrabold">Iniciar sesion</a>
+  </p>
+  }
+</form>

@@ -2,7 +2,8 @@ import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
-import { LoaderComponent } from './admin/components/loader/loader.component';
+import { LoaderComponent } from './components/loader/loader.component';
+
 
 @Component({
   selector: 'app-root',

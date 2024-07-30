@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { InventoryComponent } from './inventory/inventory.component';
-import { StudentsComponent } from './students/students.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { authGuard } from '../guards/auth.guard';
+import { InventoryComponent } from './pages/inventory/inventory.component';
+import { StudentsComponent } from './pages/students/students.component';
 
 export const ADMIN_ROUTES: Routes = [
   {

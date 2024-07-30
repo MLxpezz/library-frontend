@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { CardComponent } from '../components/card/card.component';
+import { CardComponent } from '../../../components/card/card.component';
 import { InventoryComponent } from '../inventory/inventory.component';
 import { Router, RouterOutlet } from '@angular/router';
-import { LoaderComponent } from '../components/loader/loader.component';
-import { AuthService } from '../../core/services/authService/auth-service.service';
+import { AuthService } from '../../../core/services/authService/auth-service.service';
+import { LoaderComponent } from '../../../components/loader/loader.component';
 
 @Component({
   selector: 'app-dashboard',

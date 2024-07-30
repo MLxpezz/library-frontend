@@ -1,0 +1,112 @@
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { StudentService } from '../../core/services/studentService/student.service';
+import { NewStudent, Student } from '../../interfaces/student';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+
+@Component({
+  selector: 'app-modal',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './modal.component.html',
+  styleUrl: './modal.component.css',
+})
+export class ModalComponent {
+  @Input() showModal!: boolean;
+  @Output() close = new EventEmitter<void>();
+  @Input() student!: Student | any;
+
+  studentService: StudentService = inject(StudentService);
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['student'] && changes['student'].currentValue) {
+      this.studentForm.patchValue({
+        name: this.student ? this.student.name : '',
+        lastname: this.student ? this.student.lastname : '',
+        email: this.student ? this.student.email : '',
+        phone: this.student ? this.student.phone : '',
+        enrollmentNumber: this.student ? this.student.enrollmentNumber : '',
+        address: this.student ? this.student.address : '',
+      });
+    }
+  }
+
+  studentForm: FormGroup = new FormGroup({
+    name: new FormControl('', Validators.required),
+    lastname: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    phone: new FormControl('', [Validators.required]),
+    enrollmentNumber: new FormControl('', Validators.required),
+    address: new FormControl('', Validators.required),
+  });
+
+  hideModal() {
+    this.clearFormAndStudent();
+    this.showModal = false;
+    this.close.emit();
+  }
+
+  clearFormAndStudent() {
+    this.studentForm.reset({
+      name: '',
+      lastname: '',
+      email: '',
+      phone: '',
+      enrollmentNumber: '',
+      address: '',
+    });
+  }
+
+  onSubmit() {
+    const studentBase = {
+      name: this.studentForm.controls['name'].value,
+      lastname: this.studentForm.controls['lastname'].value,
+      email: this.studentForm.controls['email'].value,
+      phone: this.studentForm.controls['phone'].value,
+      enrollmentNumber: this.studentForm.controls['enrollmentNumber'].value,
+      address: this.studentForm.controls['address'].value,
+    };
+
+    if (this.student) {
+      const student: Student = {
+        ...studentBase,
+        id: this.student.id,
+        countLoans: this.student.countLoans,
+      };
+      this.updateStudent(student);
+    } else {
+      const newStudent: NewStudent = studentBase;
+      console.log(newStudent);
+
+      this.createStudent(newStudent);
+    }
+  }
+
+  createStudent(student: NewStudent) {
+    this.studentService.createStudent(student).subscribe({
+      next: (data) => {
+        this.clearFormAndStudent();
+        this.hideModal();
+      },
+    });
+  }
+
+  updateStudent(student: Student) {
+    this.studentService.updateStudent(student).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+    });
+  }
+}

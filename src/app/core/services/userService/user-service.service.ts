@@ -14,13 +14,13 @@ export class UserService {
   userLogin(userData: Login): Observable<LoginResponse> {
     return this._http.post<LoginResponse>(environment.loginUrl, userData).pipe(
       map((response) => {
-        if(response.isSuccess) {
-          localStorage.setItem("token", response.token);
+        if (response.isSuccess) {
+          localStorage.setItem('token', response.token);
         }
         return response;
       }),
       catchError((error: HttpErrorResponse) => {
-        return throwError(() => new Error(error.type.toString()))
+        return throwError (() => new Error(error.message));
       })
     );
   }
@@ -28,10 +28,10 @@ export class UserService {
   userRegister(userData: Register): Observable<Register> {
     return this._http.post<Register>(environment.registerUrl, userData).pipe(
       map((response) => {
-        if(response) {
-          alert("Registro exitoso.");
-        }
         return response;
+      }),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => new Error(error.message))
       })
     );
   }

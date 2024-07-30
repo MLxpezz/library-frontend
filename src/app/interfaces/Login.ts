@@ -7,5 +7,4 @@ export interface LoginResponse {
     message: string;
     token: string;
     isSuccess: boolean;
-    expiration: string;
 }

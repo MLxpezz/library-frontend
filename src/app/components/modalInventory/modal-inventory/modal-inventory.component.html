@@ -1,0 +1,88 @@
+@if(showModal) {
+<section
+  class="w-screen h-screen absolute top-0 left-0 bottom-0 right-0 m-auto flex items-center justify-center bg-gray-400 backdrop:blur-sm bg-opacity-50"
+>
+  <div class="w-[30%] bg-white p-3 pt-5 pb-8">
+    <h4 class="text-blue-medio-strong text-center mb-4 text-[30px]">
+      Añadir libro
+    </h4>
+    <form
+      action=""
+      class="w-fit m-auto flex flex-col items-center justify-center gap-8"
+      [formGroup]="bookForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="w-full">
+        <input
+          class="w-full border-b-2 border-b-blue-strong outline-none text-blue-strong placeholder:text-blue-medio-strong"
+          type="text"
+          placeholder="Titulo"
+          formControlName="title"
+        />
+        @if(bookForm.controls['title'].hasError('required') &&
+        bookForm.controls['title'].touched) {
+        <p class="text-red-500 text-[12px]">El campo Titulo es requerido.</p>
+        }
+      </div>
+      <div class="flex justify-between gap-5">
+        <div>
+          <input
+            class="border-b-2 border-b-blue-strong outline-none text-blue-strong placeholder:text-blue-medio-strong"
+            type="text"
+            placeholder="Autor"
+            formControlName="author"
+          />
+          @if(bookForm.controls['author'].hasError('required') &&
+          bookForm.controls['author'].touched) {
+          <p class="text-red-500 text-[12px]">El campo Autor es requerido.</p>
+          }
+        </div>
+        <div class="w-full">
+          <input
+            class="w-full border-b-2 border-b-blue-strong outline-none text-blue-strong placeholder:text-blue-medio-strong"
+            type="email"
+            placeholder="isbn"
+            formControlName="isbn"
+          />
+          @if(bookForm.controls['isbn'].hasError('required') &&
+          bookForm.controls['isbn'].touched) {
+          <p class="text-red-500 text-[12px]">El campo isbn es requerido.</p>
+          }
+        </div>
+      </div>
+      <div class="w-full">
+        <input
+          class="border-b-2 border-b-blue-strong outline-none text-blue-strong placeholder:text-blue-medio-strong"
+          type="number"
+          placeholder="Cantidad"
+          formControlName="quantity"
+        />
+        @if(bookForm.controls['quantity'].hasError('required') &&
+        bookForm.controls['quantity'].touched) {
+        <p class="text-red-500 text-[12px]">El campo cantidad es requerido y solo debe contener numeros.</p>
+        }@if(bookForm.controls['quantity'].hasError('min')) {
+        <p class="text-red-500 text-[12px]">
+          La cantidad tiene que ser mayor a 0
+        </p>
+        }
+      </div>
+      <div class="w-full flex flex-col gap-4">
+        <button
+          class="w-full bg-blue-medio-strong text-white p-2 hover:cursor-pointer hover:bg-white hover:outline-1 hover:outline hover:outline-blue-medio-strong hover:text-blue-medio-strong"
+          type="submit"
+          [disabled]="!bookForm.valid"
+        >
+          Añadir
+        </button>
+        <button
+          class="w-full border border-blue-medio-strong text-blue-medio-strong p-2 hover:bg-blue-medio-strong hover:text-white"
+          type="button"
+          (click)="hideModal()"
+        >
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+}

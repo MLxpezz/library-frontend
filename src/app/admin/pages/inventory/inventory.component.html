@@ -15,6 +15,7 @@
         </div>
       </div>
       <button
+      (click)="openModal()"
         class="w-[150px] bg-primary-color text-blue-white font-bold p-1 rounded-[10px] hover:bg-white hover:border-2 hover:border-blue-white hover:text-primary-color ml-[124px]"
       >
         Añadir libro
@@ -29,16 +30,18 @@
       </a>
     </div>
   </section>
+  @if(books$ | async; as results) {
   <section
-    class="w-full grid grid-cols-3 justify-center items-center gap-16 mt-11"
+    class="w-full grid book-repeat justify-center items-center gap-7 mt-11"
   >
-    @for(card of listCardsInfo; track card.author) {
+    @for(book of results; track book.id) {
     <app-card-inventory
-      [title]="card.title"
-      [author]="card.author"
-      [loans]="card.loans"
-      [stock]="card.stock"
+      [title]="book.title"
+      [author]="book.author"
+      [stock]="book.quantity"
     />
     }
   </section>
+  }
+  <app-modal-inventory [showModal]="showModal" (close)="close()"/>
 </main>

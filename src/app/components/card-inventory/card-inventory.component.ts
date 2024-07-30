@@ -11,6 +11,5 @@ export class CardInventoryComponent {
 
   @Input() title!: string;
   @Input() author!: string;
-  @Input() loans!: string;
-  @Input() stock!: string;
+  @Input() stock!: number;
 }

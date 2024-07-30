@@ -1,5 +1,5 @@
-<main class="flex items-center justify-between">
-  <section class="flex flex-col w-1/2">
+<main class="flex items-center justify-between relative">
+  <section class="flex flex-col w-1/2 relative">
     <div class="text-start m-auto w-1/2">
       <h3 class="text-blue-medio text-[48px] font-extrabold">Universidad</h3>
       <h2 class="text-blue-medio-strong text-[37px] font-bold">
@@ -7,52 +7,15 @@
       </h2>
     </div>
 
-    <form
-      [formGroup]="loginForm"
-      (ngSubmit)="onSubmit()"
-      action=""
-      class="flex flex-col mt-[120px] gap-5 w-1/2 m-auto"
-    >
-      @if(badCredentials) {
-      <p class="text-red-600 p-0 m-0 text-[16px] text-center">
-        Credenciales invalidas o la cuenta no existe.
-      </p>
-      }
-      <div class="w-full">
-        <input
-          type="text"
-          placeholder="Correo"
-          class="w-full border-b-2 border-b-blue-strong placeholder:text-blue-medio text-sm outline-none text-blue-medio font-bold p-1 mb-2"
-          formControlName="email"
-        />
-        @if(email.hasError('required') && email.touched) {
-        <p class="text-red-600 p-0 m-0">El campo email es requerido.</p>
-        }
-      </div>
-      <div class="w-full">
-        <input
-          type="password"
-          placeholder="Contraseña"
-          class="w-full border-b-2 border-blue-strong placeholder:text-blue-medio text-sm outline-none text-blue-medio font-bold p-1 mb-2"
-          formControlName="password"
-        />
-        @if(password.hasError('required') && password.touched) {
-        <p class="text-red-600 p-0 m-0">El campo contraseña es requerido.</p>
-        }
-      </div>
-      <button
-        type="submit"
-        class="bg-blue-medio-strong text-blue-white font-extrabold p-2 rounded-lg hover:bg-blue-medio hover:cursor-pointer"
-        [disabled]="!loginForm.valid"
-      >
-        Ingresar
-      </button>
-      <p class="text-blue-medio hover:cursor-pointer">
-        ¿Olvidaste tu contraseña?
-      </p>
-    </form>
+    <app-auth-form submitButtonText="Ingresar"/>
   </section>
   <section class="w-1/2 h-screen relative">
     <img [ngSrc]="imgUrl" alt="image" class="h-screen w-full" fill priority />
   </section>
+  <a
+    routerLink="/register"
+    class="text-blue-medio-strong absolute text-[20px] font-extrabold bottom-3 right-[52%] flex gap-1"
+    >Crear cuenta
+    <img ngSrc="assets/arrow.png" alt="registro" height="30" width="25" />
+  </a>
 </main>

@@ -39,7 +39,9 @@
   <section class="mt-10 w-full">
     <table class="w-full border-collapse">
       <thead class="">
-        <tr class="flex justify-between items-center text-blue-strong pr-5 pl-5">
+        <tr
+          class="flex justify-between items-center text-blue-strong pr-5 pl-5"
+        >
           <th class="">ID</th>
           <th class="">Nombre</th>
           <th class="">Matricula</th>
@@ -52,10 +54,12 @@
       <tbody class="flex flex-col gap-[20px] mt-10">
         @for(student of resultObject; track student.id) {
         <tr
-          class="w-full border-2 border-blue-white rounded-lg p-5 flex  items-center text-primary-color"
+          class="w-full border-2 border-blue-white rounded-lg p-5 flex items-center text-primary-color"
         >
           <td class="mr-[115px]">{{ student.id }}</td>
-          <td class="text-nowrap mr-[110px]">{{ student.name }} {{ student.lastname }}</td>
+          <td class="text-nowrap mr-[110px]">
+            {{ student.name }} {{ student.lastname }}
+          </td>
           <td class="mr-[170px]">{{ student.enrollmentNumber }}</td>
           <td class="mr-[100px]">{{ student.phone }}</td>
           <td class="mr-[115px] w-[17%] text-wrap">
@@ -63,8 +67,20 @@
           </td>
           <td class="mr-[190px]">{{ student.countLoans }}</td>
           <td class="flex gap-4">
-            <img src="assets/delete.png" alt="" />
-            <img src="assets/edit.png" alt="" />
+            <button
+              (click)="deleteStudent(student.id)"
+              class="hover:cursor-pointer p-2"
+            >
+              <img
+                ngSrc="assets/delete.png"
+                alt="delete"
+                height="75"
+                width="75"
+              />
+            </button>
+            <button (click)="updateStudent(student)" class="hover:cursor-pointer p-2">
+              <img ngSrc="assets/edit.png" alt="edit" height="75" width="75" />
+            </button>
           </td>
         </tr>
         }
@@ -72,5 +88,5 @@
     </table>
   </section>
   } }
-  <app-modal [showModal]="showModal" (close)="closeModal()"/>
+  <app-modal [showModal]="showModal" [student]="student" (close)="closeModal()" />
 </main>
