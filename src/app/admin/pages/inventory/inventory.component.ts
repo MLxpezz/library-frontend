@@ -19,6 +19,8 @@ export class InventoryComponent {
   private bookService: BookService = inject(BookService);
   books$: Observable<Book[]> = this.bookService.getBooks();
 
+  bookToUpdate!: Book | null;
+
   searchButton: string = "assets/icons8-search-book-48 1.png";
   showModal: boolean = false;
 
@@ -28,6 +30,12 @@ export class InventoryComponent {
 
   close() {
     this.showModal = false;
+    this.bookToUpdate = null;
+  }
+
+  receptEmitter(event$: Book) {
+    this.bookToUpdate = event$;
+    this.openModal();
   }
   
 }

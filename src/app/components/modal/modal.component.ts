@@ -25,7 +25,7 @@ import {
 export class ModalComponent {
   @Input() showModal!: boolean;
   @Output() close = new EventEmitter<void>();
-  @Input() student!: Student | any;
+  @Input() student!: Student | null;
 
   studentService: StudentService = inject(StudentService);
 
@@ -69,7 +69,7 @@ export class ModalComponent {
   }
 
   onSubmit() {
-    const studentBase = {
+    const studentBase: NewStudent = {
       name: this.studentForm.controls['name'].value,
       lastname: this.studentForm.controls['lastname'].value,
       email: this.studentForm.controls['email'].value,
@@ -79,17 +79,13 @@ export class ModalComponent {
     };
 
     if (this.student) {
-      const student: Student = {
+      this.updateStudent({
         ...studentBase,
         id: this.student.id,
         countLoans: this.student.countLoans,
-      };
-      this.updateStudent(student);
+      });
     } else {
-      const newStudent: NewStudent = studentBase;
-      console.log(newStudent);
-
-      this.createStudent(newStudent);
+      this.createStudent(studentBase);
     }
   }
 
@@ -105,7 +101,8 @@ export class ModalComponent {
   updateStudent(student: Student) {
     this.studentService.updateStudent(student).subscribe({
       next: (response) => {
-        console.log(response);
+        this.clearFormAndStudent();
+        this.hideModal();
       },
     });
   }

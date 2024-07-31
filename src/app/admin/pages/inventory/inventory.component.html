@@ -15,7 +15,7 @@
         </div>
       </div>
       <button
-      (click)="openModal()"
+        (click)="openModal()"
         class="w-[150px] bg-primary-color text-blue-white font-bold p-1 rounded-[10px] hover:bg-white hover:border-2 hover:border-blue-white hover:text-primary-color ml-[124px]"
       >
         Añadir libro
@@ -35,13 +35,13 @@
     class="w-full grid book-repeat justify-center items-center gap-7 mt-11"
   >
     @for(book of results; track book.id) {
-    <app-card-inventory
-      [title]="book.title"
-      [author]="book.author"
-      [stock]="book.quantity"
-    />
+    <app-card-inventory [book]="book" (bookSelected)="receptEmitter($event)" />
     }
   </section>
   }
-  <app-modal-inventory [showModal]="showModal" (close)="close()"/>
+  <app-modal-inventory
+    [showModal]="showModal"
+    (close)="close()"
+    [book]="bookToUpdate"
+  />
 </main>

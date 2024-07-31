@@ -1,5 +1,5 @@
 export interface Book extends BookPost{
-    id: number,
+    id: string,
 }
 
 export interface BookPost {

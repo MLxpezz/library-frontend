@@ -35,4 +35,28 @@ export class BookService {
       })
     )
   }
+
+  deleteBook(idBook: string) {
+    return this.http.delete<any>(`${environment.deleteBook}${idBook}`, {
+      headers: {
+        Authorization: `Bearer ${this.token}`
+      }
+    }).pipe(
+      map(response => {
+        return response;
+      })
+    )
+  }
+
+  updateBook(book: Book): Observable<Book> {
+    return this.http.put<Book>(`${environment.updateBook}${book.id}`, book, {
+      headers: {
+        Authorization: `Bearer ${this.token}`
+      }
+    }).pipe(
+      map(response => {
+        return response;
+      })
+    )
+  }
 }

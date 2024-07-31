@@ -8,4 +8,6 @@ export const environment = {
     deleteStudent: "http://localhost:8080/api/students/delete/",
     getBooks: 'http://localhost:8080/api/books/get-all',
     createBook: 'http://localhost:8080/api/books/create',
+    deleteBook: 'http://localhost:8080/api/books/delete/',
+    updateBook: 'http://localhost:8080/api/books/update/',
 };
