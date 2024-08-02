@@ -45,7 +45,7 @@ export class DashboardComponent {
     {
       areaName: "Prestamos",
       imgUrl: "assets/inventory.png",
-      pageUrl: ""
+      pageUrl: "/dashboard/loans"
     },
     {
       areaName: "Administrativos",

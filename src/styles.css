@@ -1,10 +1,15 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
 * {
     font-family: "Roboto", sans-serif;
     font-style: normal;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .grid-repeat {
@@ -13,4 +18,8 @@
 
 .book-repeat {
     grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
+}
+
+.loan-repeat {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 }

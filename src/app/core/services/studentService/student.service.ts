@@ -18,7 +18,11 @@ export class StudentService {
         Accept: 'application/json',
         'Content-type': 'application/json',
       },
-    });
+    }).pipe(
+      map(student => {
+        return student;
+      })
+    );
   }
 
   createStudent(student: NewStudent): Observable<NewStudent> {
