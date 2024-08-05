@@ -1,5 +1,5 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   MatAutocompleteModule,
   MatOption,
@@ -13,6 +13,7 @@ import { Student } from '../../../interfaces/student';
 import { Book } from '../../../interfaces/book';
 import { LoanService } from '../../../core/services/loanService/loan-service.service';
 import { LoanPost } from '../../../interfaces/loan';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal-loans',
@@ -36,10 +37,11 @@ export class ModalLoansComponent {
   bookService: BookService = inject(BookService);
   studentService: StudentService = inject(StudentService);
   loanService: LoanService = inject(LoanService);
+  router: Router = inject(Router);
 
   loansForm: FormGroup = new FormGroup({
-    title: new FormControl(),
-    student: new FormControl(),
+    title: new FormControl('', Validators.required),
+    student: new FormControl('', Validators.required),
   });
 
   books: Book[] = [];
@@ -101,7 +103,15 @@ export class ModalLoansComponent {
 
   hideModal() {
     this.showModal = false;
+    this.clearForm();
     this.closeModal.emit();
+  }
+
+  clearForm() {
+    this.loansForm.reset({
+      title: '',
+      student: ''
+    })
   }
 
   onSubmit() {
@@ -113,6 +123,8 @@ export class ModalLoansComponent {
     this.loanService.createLoan(dataLoan).subscribe({
       next: response => {
         console.log(response);
+        this.clearForm();
+        this.router.navigate(["/dashboard/pending-returns"])
       }
     });
   }

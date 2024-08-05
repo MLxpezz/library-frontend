@@ -12,47 +12,53 @@
       [formGroup]="loansForm"
       (ngSubmit)="onSubmit()"
     >
-      <input
-        class="w-full border-b-2 border-b-blue-strong outline-none text-blue-strong placeholder:text-blue-medio-strong bg-white"
-        type="text"
-        placeholder="Titulo del libro"
-        matInput
-        formControlName="title"
-        [matAutocomplete]="autoBooks"
-      />
+      <div class="w-full">
+        <input
+          class="w-full border-b-2 border-b-blue-strong outline-none text-blue-strong placeholder:text-blue-medio-strong bg-white"
+          type="text"
+          placeholder="Titulo del libro"
+          matInput
+          formControlName="title"
+          [matAutocomplete]="autoBooks"
+        />
+        @if(loansForm.controls['title'].hasError('required') &&
+        loansForm.controls['title'].touched) {
+        <p class="text-red-500">El campo Titulo del libro es requerido.</p>
+        }
+      </div>
       <mat-autocomplete
-        style="color: #097bc0;"
+        style="color: #097bc0"
         #autoBooks="matAutocomplete"
         (optionSelected)="onBookSelected($event)"
       >
         @for(book of filteredBooks | async; track book) {
-        <mat-option
-          [value]="book"
-          style="color: #097bc0;"
-        >
+        <mat-option [value]="book" style="color: #097bc0">
           {{ book.title }}
         </mat-option>
         }
       </mat-autocomplete>
 
-      <input
-        class="w-full border-b-2 border-b-blue-strong outline-none text-blue-strong placeholder:text-blue-medio-strong"
-        type="text"
-        placeholder="Nombre del estudiante"
-        matInput
-        formControlName="student"
-        [matAutocomplete]="autoStudents"
-      />
+      <div class="w-full">
+        <input
+          class="w-full border-b-2 border-b-blue-strong outline-none text-blue-strong placeholder:text-blue-medio-strong"
+          type="text"
+          placeholder="Nombre del estudiante"
+          matInput
+          formControlName="student"
+          [matAutocomplete]="autoStudents"
+        />
+        @if(loansForm.controls['student'].hasError('required') &&
+        loansForm.controls['student'].touched) {
+        <p class="text-red-500">El campo Nombre del estudiante es requerido.</p>
+        }
+      </div>
       <mat-autocomplete
-        style="color: #097bc0;"
+        style="color: #097bc0"
         #autoStudents="matAutocomplete"
         (optionSelected)="onStudentSelected($event)"
       >
         @for(student of filteredStudents | async; track student) {
-        <mat-option
-          [value]="student"
-          style="color: #097bc0;"
-        >
+        <mat-option [value]="student" style="color: #097bc0">
           {{ student.name }} {{ student.lastname }} -
           {{ student.enrollmentNumber }}
         </mat-option>
@@ -61,6 +67,7 @@
       <div class="w-full flex flex-col gap-4">
         <button
           class="w-full bg-blue-medio-strong text-white p-2 hover:cursor-pointer hover:bg-white hover:outline-1 hover:outline hover:outline-blue-medio-strong hover:text-blue-medio-strong"
+          [disabled]="!loansForm.valid"
           type="submit"
         >
           Registrar

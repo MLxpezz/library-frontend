@@ -1,14 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { CardComponent } from '../../../components/card/card.component';
 import { InventoryComponent } from '../inventory/inventory.component';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../../core/services/authService/auth-service.service';
 import { LoaderComponent } from '../../../components/loader/loader.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CardComponent, InventoryComponent, LoaderComponent, RouterOutlet],
+  imports: [CardComponent, InventoryComponent, LoaderComponent, RouterOutlet, RouterLink],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -40,7 +40,7 @@ export class DashboardComponent {
     {
       areaName: "Devoluciones pendientes",
       imgUrl: "assets/book.png",
-      pageUrl: ""
+      pageUrl: "/dashboard/pending-returns"
     },
     {
       areaName: "Prestamos",

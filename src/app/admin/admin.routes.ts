@@ -4,6 +4,7 @@ import { authGuard } from '../guards/auth.guard';
 import { InventoryComponent } from './pages/inventory/inventory.component';
 import { StudentsComponent } from './pages/students/students.component';
 import { LoansComponent } from './pages/loans/loans/loans.component';
+import { PendingReturnsComponent } from './pages/pending-returns/pending-returns/pending-returns.component';
 
 export const ADMIN_ROUTES: Routes = [
   {
@@ -23,6 +24,11 @@ export const ADMIN_ROUTES: Routes = [
       {
         path: 'loans',
         component: LoansComponent,
+        canActivate: [authGuard]
+      },
+      {
+        path: 'pending-returns',
+        component: PendingReturnsComponent,
         canActivate: [authGuard]
       },
     ],

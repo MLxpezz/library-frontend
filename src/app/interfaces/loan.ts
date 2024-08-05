@@ -16,3 +16,18 @@ export interface LoanResponse {
     bookTitle: string,
     returnDate: Date
 }
+
+export interface LoanTemp {
+    id: number,
+    studentName: string,
+    bookTitle: string
+}
+
+export interface LoanReturning {
+    id: number,
+    studentName: string,
+    bookTitle: string,
+    returnDate: Date,
+    amount: number,
+    daysAfterReturnDate: number
+}

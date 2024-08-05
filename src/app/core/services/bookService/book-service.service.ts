@@ -24,6 +24,18 @@ export class BookService {
     )
   }
 
+  getBookById(bookId: string): Observable<Book> {
+    return this.http.get<Book>(`${environment.getBookById}${bookId}`, {
+      headers: {
+        Authorization: `Bearer ${this.token}`
+      }
+    }).pipe(
+      map(response => {
+        return response;
+      })
+    )
+  }
+
   createBook(book: BookPost): Observable<Book> {
     return this.http.post<Book>(environment.createBook, book, {
       headers: {

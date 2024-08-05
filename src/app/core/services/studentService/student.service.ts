@@ -25,6 +25,20 @@ export class StudentService {
     );
   }
 
+  getStudentById(studentId: number): Observable<Student> {
+    return this.http.get<Student>(`${environment.getStudentById}${studentId}`, {
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+        Accept: 'application/json',
+        'Content-type': 'application/json',
+      },
+    }).pipe(
+      map(student => {
+        return student;
+      })
+    );
+  }
+
   createStudent(student: NewStudent): Observable<NewStudent> {
     return this.http.post<Student>(environment.createStudent, student, {
       headers: {

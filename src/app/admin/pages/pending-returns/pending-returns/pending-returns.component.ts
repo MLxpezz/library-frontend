@@ -1,29 +1,26 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ModalLoansComponent } from '../../../../components/modalLoans/modal-loans/modal-loans.component';
-import { LoanService } from '../../../../core/services/loanService/loan-service.service';
+import { LoanReturning } from '../../../../interfaces/loan';
 import { forkJoin } from 'rxjs';
-import { LoanTemp } from '../../../../interfaces/loan';
-import { AsyncPipe } from '@angular/common';
 import { BookService } from '../../../../core/services/bookService/book-service.service';
+import { LoanService } from '../../../../core/services/loanService/loan-service.service';
 import { StudentService } from '../../../../core/services/studentService/student.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-loans',
+  selector: 'app-pending-returns',
   standalone: true,
-  imports: [RouterLink, ModalLoansComponent, AsyncPipe],
-  templateUrl: './loans.component.html',
-  styleUrl: './loans.component.css',
+  imports: [RouterLink, AsyncPipe],
+  templateUrl: './pending-returns.component.html',
+  styleUrl: './pending-returns.component.css'
 })
-export class LoansComponent {
+export class PendingReturnsComponent {
+
   loanService: LoanService = inject(LoanService);
   bookService: BookService = inject(BookService);
   studentService: StudentService = inject(StudentService);
 
-  searchButton: string = 'assets/icons8-search-book-48 1.png';
-  showModal: boolean = false;
-
-  loansByStudentAndBooks: LoanTemp[] = [];
+  loansByStudentAndBooks: LoanReturning[] = [];
 
   ngOnInit(): void {
     this.loanService.getLoans().subscribe({
@@ -34,10 +31,13 @@ export class LoansComponent {
             book: this.bookService.getBookById(loan.bookId),
           }).subscribe({
             next: ({ student, book }) => {
-              let loanTemp: LoanTemp = {
+              let loanTemp: LoanReturning = {
                 id: loan.id,
                 studentName: `${student.name} ${student.lastname}`,
                 bookTitle: book.title,
+                returnDate: loan.returnDate,
+                amount: loan.returnDate > new Date() ? 0 : 0,
+                daysAfterReturnDate: loan.returnDate > new Date() ? 0 : 0
               };
 
               this.loansByStudentAndBooks.push(loanTemp);
@@ -48,11 +48,7 @@ export class LoansComponent {
     });
   }
 
-  openModal() {
-    this.showModal = true;
-  }
-
-  closeModal() {
-    this.showModal = false;
+  updateLoan(loanId: number) {
+    console.log(loanId);
   }
 }

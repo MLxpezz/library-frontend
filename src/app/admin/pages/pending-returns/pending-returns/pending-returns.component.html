@@ -1,0 +1,73 @@
+<main class="w-[80%] m-auto mt-10 flex flex-col justify-center items-center">
+  <section class="w-full flex items-center justify-between">
+    <h2 class="text-[36px] text-blue-medio">Devoluciones pendientes</h2>
+    <div class="flex gap-9">
+      <div class="w-[548px] relative">
+        <input
+          type="text"
+          placeholder="Nombre del estudiante.."
+          class="w-[548px] border-2 border-blue-white p-1 pl-3 rounded-xl placeholder:p-1 placeholder:text-primary-color outline-none text-primary-color"
+        />
+        <div
+          class="absolute bg-blue-white w-[80px] h-full rounded-xl right-0 top-0 flex items-center justify-center"
+        >
+          <img
+            class="hover:cursor-pointer"
+            src="assets/icons8-search-book-48 1.png"
+            alt="search"
+          />
+        </div>
+      </div>
+      <a routerLink="/dashboard">
+        <button
+          class="flex items-center justify-center w-[150px] h-full bg-primary-color text-blue-white font-bold p-1 rounded-[10px] hover:bg-white hover:border hover:border-blue-medio hover:text-primary-color"
+        >
+          Volver
+          <img src="/assets/return.png" alt="" />
+        </button>
+      </a>
+    </div>
+  </section>
+  @if(loansByStudentAndBooks.length > 0) {
+  <section
+    class="w-full mt-10 grid grid-cols-4 items-center justify-between gap-8"
+  >
+    @for(loan of loansByStudentAndBooks; track loan.id) {
+    <article
+      class="border-2 border-blue-white p-5 flex items-center justify-between rounded-[7px]"
+    >
+      <div class="flex flex-col items-start justify-center gap-1">
+        <p class="text-blue-strong">{{ loan.bookTitle }}</p>
+        <section class="flex gap-1">
+          <p class="text-primary-color font-bold">Alumno:</p>
+          <p class="text-primary-color">{{ loan.studentName }}</p>
+        </section>
+        <section class="flex gap-1">
+          <p class="text-primary-color font-bold">Fecha de devolucion:</p>
+          <p class="text-primary-color">
+            {{ loan.returnDate }}
+          </p>
+        </section>
+        <section class="flex gap-1">
+          <p class="text-primary-color font-bold">
+            Dias pasados de la devolucion:
+          </p>
+          <p class="text-primary-color">
+            {{ loan.daysAfterReturnDate }}
+          </p>
+        </section>
+        <section class="flex gap-1">
+          <p class="text-primary-color font-bold">
+            Deuda por devolucion tardia:
+          </p>
+          <p class="text-primary-color">${{ loan.amount }}</p>
+        </section>
+      </div>
+      <button (click)="updateLoan(loan.id)">
+        <img src="assets/edit.png" alt="edit" />
+      </button>
+    </article>
+    }
+  </section>
+  }
+</main>
