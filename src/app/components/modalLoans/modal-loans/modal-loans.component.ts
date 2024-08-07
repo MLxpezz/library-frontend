@@ -122,7 +122,6 @@ export class ModalLoansComponent {
 
     this.loanService.createLoan(dataLoan).subscribe({
       next: response => {
-        console.log(response);
         this.clearForm();
         this.router.navigate(["/dashboard/pending-returns"])
       }

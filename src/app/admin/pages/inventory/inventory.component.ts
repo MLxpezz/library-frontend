@@ -6,23 +6,42 @@ import { Observable } from 'rxjs';
 import { Book } from '../../../interfaces/book';
 import { AsyncPipe } from '@angular/common';
 import { ModalInventoryComponent } from '../../../components/modalInventory/modal-inventory/modal-inventory.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-inventory',
   standalone: true,
-  imports: [CardInventoryComponent, RouterLink, AsyncPipe, ModalInventoryComponent],
+  imports: [CardInventoryComponent, RouterLink, AsyncPipe, ModalInventoryComponent, FormsModule],
   templateUrl: './inventory.component.html',
   styleUrl: './inventory.component.css'
 })
 export class InventoryComponent {
 
   private bookService: BookService = inject(BookService);
-  books$: Observable<Book[]> = this.bookService.getBooks();
+  books!: Book[];
 
   bookToUpdate!: Book | null;
 
+  bookTitleText = "";
   searchButton: string = "assets/icons8-search-book-48 1.png";
   showModal: boolean = false;
+
+  ngOnInit(): void {
+    this.bookService.getBooks().subscribe({
+      next: books => {
+        this.books = books.map(book => book);
+      }
+    })
+  }
+
+  filteredBooks() {
+    if(this.bookTitleText === "") {
+      return this.books;
+    }
+    return this.books.filter(book => {
+      return book.title.toLowerCase().startsWith(this.bookTitleText);
+    })
+  }
 
   openModal() {
     this.showModal = true;

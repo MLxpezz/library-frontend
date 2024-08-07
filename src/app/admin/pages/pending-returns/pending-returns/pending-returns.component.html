@@ -1,12 +1,12 @@
 <main class="w-[80%] m-auto mt-10 flex flex-col justify-center items-center">
   <section class="w-full flex items-center justify-between">
     <h2 class="text-[36px] text-blue-medio">Devoluciones pendientes</h2>
-    <div class="flex gap-9">
-      <div class="w-[548px] relative">
+    <div class="w-[60%] flex justify-end items-center gap-9">
+      <div class="w-[50%] relative">
         <input
           type="text"
           placeholder="Nombre del estudiante.."
-          class="w-[548px] border-2 border-blue-white p-1 pl-3 rounded-xl placeholder:p-1 placeholder:text-primary-color outline-none text-primary-color"
+          class="w-full border-2 border-blue-white p-1 pl-3 rounded-xl placeholder:p-1 placeholder:text-primary-color outline-none text-primary-color"
         />
         <div
           class="absolute bg-blue-white w-[80px] h-full rounded-xl right-0 top-0 flex items-center justify-center"
@@ -20,7 +20,7 @@
       </div>
       <a routerLink="/dashboard">
         <button
-          class="flex items-center justify-center w-[150px] h-full bg-primary-color text-blue-white font-bold p-1 rounded-[10px] hover:bg-white hover:border hover:border-blue-medio hover:text-primary-color"
+          class="flex items-center justify-center w-[150px] h-full bg-primary-color text-blue-white font-bold p-1 rounded-[10px] hover:bg-white hover:border-2 hover:border-blue-white hover:text-primary-color"
         >
           Volver
           <img src="/assets/return.png" alt="" />
@@ -28,11 +28,11 @@
       </a>
     </div>
   </section>
-  @if(loansByStudentAndBooks.length > 0) {
+  @if(loansInfo | async; as results) {
   <section
     class="w-full mt-10 grid grid-cols-4 items-center justify-between gap-8"
   >
-    @for(loan of loansByStudentAndBooks; track loan.id) {
+    @for(loan of results; track loan.idLoan) {
     <article
       class="border-2 border-blue-white p-5 flex items-center justify-between rounded-[7px]"
     >
@@ -45,7 +45,7 @@
         <section class="flex gap-1">
           <p class="text-primary-color font-bold">Fecha de devolucion:</p>
           <p class="text-primary-color">
-            {{ loan.returnDate }}
+            {{ loan.returningDate }}
           </p>
         </section>
         <section class="flex gap-1">
@@ -53,17 +53,17 @@
             Dias pasados de la devolucion:
           </p>
           <p class="text-primary-color">
-            {{ loan.daysAfterReturnDate }}
+            {{ loan.daysAfterReturningDate }}
           </p>
         </section>
         <section class="flex gap-1">
           <p class="text-primary-color font-bold">
             Deuda por devolucion tardia:
           </p>
-          <p class="text-primary-color">${{ loan.amount }}</p>
+          <p class="text-primary-color">${{ loan.penaltyAmount }}</p>
         </section>
       </div>
-      <button (click)="updateLoan(loan.id)">
+      <button (click)="updateLoan(loan.idLoan)">
         <img src="assets/edit.png" alt="edit" />
       </button>
     </article>

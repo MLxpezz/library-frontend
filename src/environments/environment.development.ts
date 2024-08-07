@@ -13,6 +13,7 @@ export const environment = {
   deleteBook: 'http://localhost:8080/api/books/delete/',
   updateBook: 'http://localhost:8080/api/books/update/',
   getLoans: 'http://localhost:8080/api/loans/get-all',
+  getInfoLoans: 'http://localhost:8080/api/loans/get-info-loans',
   createLoan: 'http://localhost:8080/api/loans/create',
   updateLoan: 'http://localhost:8080/api/loans/update/',
   deleteLoan: 'http://localhost:8080/api/loans/delete/',

@@ -1,12 +1,13 @@
 <main class="w-[80%] m-auto mt-10 flex flex-col justify-center items-center">
   <section class="w-full flex items-center justify-between">
     <h2 class="text-[36px] text-blue-medio">Inventario</h2>
-    <div class="flex gap-9">
-      <div class="w-[548px] relative">
+    <div class="w-full flex justify-end items-center gap-9">
+      <div class="w-[35%] relative">
         <input
           type="text"
           placeholder="Titulo del libro.."
-          class="w-[548px] border-2 border-blue-white p-1 pl-3 rounded-xl placeholder:p-1 placeholder:text-primary-color outline-none text-primary-color"
+          class="w-full border-2 border-blue-white p-1 pl-3 rounded-xl placeholder:p-1 placeholder:text-primary-color outline-none text-primary-color"
+          [(ngModel)]="bookTitleText"
         />
         <div
           class="absolute bg-blue-white w-[80px] h-full rounded-xl right-0 top-0 flex items-center justify-center"
@@ -16,13 +17,13 @@
       </div>
       <button
         (click)="openModal()"
-        class="w-[150px] bg-primary-color text-blue-white font-bold p-1 rounded-[10px] hover:bg-white hover:border-2 hover:border-blue-white hover:text-primary-color ml-[124px]"
+        class="w-[150px] bg-primary-color text-blue-white font-bold p-1 rounded-[10px] hover:bg-white hover:border-2 hover:border-blue-white hover:text-primary-color"
       >
         Añadir libro
       </button>
       <a routerLink="/dashboard">
         <button
-          class="flex items-center justify-center w-[150px] h-full bg-primary-color text-blue-white font-bold p-1 rounded-[10px] hover:bg-white hover:border hover:border-blue-medio hover:text-primary-color"
+          class="flex items-center justify-center w-[150px] h-full bg-primary-color text-blue-white font-bold p-1 rounded-[10px] hover:bg-white hover:border-2 hover:border-blue-white hover:text-primary-color"
         >
           Volver
           <img src="/assets/return.png" alt="" />
@@ -30,11 +31,11 @@
       </a>
     </div>
   </section>
-  @if(books$ | async; as results) {
+  @if(books && books.length > 0) {
   <section
     class="w-full grid book-repeat justify-center items-center gap-7 mt-11"
   >
-    @for(book of results; track book.id) {
+    @for(book of filteredBooks(); track book.id) {
     <app-card-inventory [book]="book" (bookSelected)="receptEmitter($event)" />
     }
   </section>

@@ -1,12 +1,13 @@
 <main class="w-4/5 m-auto mt-10">
   <section class="w-full flex items-center justify-between">
     <h2 class="text-[36px] text-blue-medio">Estudiantes</h2>
-    <div class="flex gap-9">
-      <div class="w-[548px] relative">
+    <div class="w-full flex justify-end items-center gap-9">
+      <div class="w-[35%] relative">
         <input
           type="text"
           placeholder="Nombre del estudiante..."
-          class="w-[548px] h-full border-2 border-blue-white p-1 pl-3 rounded-xl placeholder:p-1 placeholder:text-primary-color outline-none text-primary-color"
+          class="w-full h-full border-2 border-blue-white p-1 pl-3 rounded-xl placeholder:p-1 placeholder:text-primary-color outline-none text-primary-color"
+          [(ngModel)]="studentNameText"
         />
         <div
           class="absolute bg-blue-white w-[80px] h-full rounded-xl right-0 top-0 flex items-center justify-center"
@@ -19,7 +20,7 @@
         </div>
       </div>
       <button
-        class="flex items-center justify-center gap-[5px] w-auto bg-primary-color text-blue-white font-bold p-1 pr-2 pl-2 rounded-[10px] border border-blue-medio hover:bg-white hover:text-primary-color"
+        class="flex items-center justify-center gap-[5px] w-auto bg-primary-color text-blue-white font-bold p-1 pr-2 pl-2 rounded-[10px] hover:outline hover:outline-2 hover:outline-blue-white hover:bg-white hover:text-primary-color"
         (click)="openModal()"
       >
         Registrar Alumno
@@ -27,7 +28,7 @@
       </button>
       <a routerLink="/dashboard">
         <button
-          class="flex items-center justify-center w-[150px] h-full bg-primary-color text-blue-white font-bold p-1 rounded-[10px] hover:bg-white hover:border hover:border-blue-medio hover:text-primary-color"
+          class="flex items-center justify-center w-[150px] h-full bg-primary-color pt-2 pb-2 text-blue-white font-bold p-1 rounded-[10px] hover:bg-white hover:border-2 hover:border-blue-white hover:text-primary-color"
         >
           Volver
           <img src="/assets/return.png" alt="" />
@@ -35,38 +36,66 @@
       </a>
     </div>
   </section>
-  @if(students$ | async; as resultObject) { @if(resultObject.length > 0) {
+  @if(students && students.length > 0) {
   <section class="mt-10 w-full">
-    <table class="w-full border-collapse">
+    <table class="w-full border-separate" style="border-spacing: 0 25px">
       <thead class="">
-        <tr
-          class="flex justify-between items-center text-blue-strong pr-5 pl-5"
-        >
-          <th class="">ID</th>
-          <th class="">Nombre</th>
-          <th class="">Matricula</th>
-          <th class="">Telefono</th>
-          <th class="">Direccion</th>
-          <th class="">Prestamos actuales</th>
-          <th class="">Acciones</th>
+        <tr class="">
+          <th class="border-collapse text-left p-5 text-blue-strong">ID</th>
+          <th class="border-collapse text-left p-5 text-blue-strong">Nombre</th>
+          <th class="border-collapse text-left p-5 text-blue-strong">
+            Matricula
+          </th>
+          <th class="border-collapse text-left p-5 text-blue-strong">
+            Telefono
+          </th>
+          <th class="border-collapse text-left p-5 text-blue-strong">
+            Direccion
+          </th>
+          <th class="border-collapse text-left p-5 text-blue-strong">
+            Prestamos
+          </th>
+          <th class="border-collapse text-left p-5 text-blue-strong">
+            Acciones
+          </th>
         </tr>
       </thead>
-      <tbody class="flex flex-col gap-[20px] mt-10">
-        @for(student of resultObject; track student.id) {
-        <tr
-          class="w-full border-2 border-blue-white rounded-lg p-5 flex items-center text-primary-color"
-        >
-          <td class="mr-[115px]">{{ student.id }}</td>
-          <td class="text-nowrap mr-[110px]">
+      <tbody class="">
+        @for(student of filterStudentsByName(); track student.id) {
+        <tr class="hover:bg-blue-white hover:rounded-xl">
+          <td
+            class="border-l-2 border-l-blue-white border-b-2 border-b-blue-white border-t-2 border-t-blue-white rounded-l-lg border-collapse text-left p-5 text-primary-color"
+          >
+            {{ student.id }}
+          </td>
+          <td
+            class="border-b-2 border-b-blue-white border-t-2 border-t-blue-white border-collapse text-left p-5 text-primary-color"
+          >
             {{ student.name }} {{ student.lastname }}
           </td>
-          <td class="mr-[170px]">{{ student.enrollmentNumber }}</td>
-          <td class="mr-[100px]">{{ student.phone }}</td>
-          <td class="mr-[115px] w-[17%] text-wrap">
+          <td
+            class="border-b-2 border-b-blue-white border-t-2 border-t-blue-white border-collapse text-left p-5 text-primary-color"
+          >
+            {{ student.enrollmentNumber }}
+          </td>
+          <td
+            class="border-b-2 border-b-blue-white border-t-2 border-t-blue-white border-collapse text-left p-5 text-primary-color"
+          >
+            {{ student.phone }}
+          </td>
+          <td
+            class="border-b-2 border-b-blue-white border-t-2 border-t-blue-white border-collapse text-left p-5 text-primary-color"
+          >
             {{ student.address }}
           </td>
-          <td class="mr-[190px]">{{ student.countLoans }}</td>
-          <td class="flex gap-4">
+          <td
+            class="border-b-2 border-b-blue-white border-t-2 border-t-blue-white border-collapse text-left p-5 text-primary-color"
+          >
+            {{ student.countLoans }}
+          </td>
+          <td
+            class="border-b-2 border-b-blue-white border-t-2 border-t-blue-white border-r-2 border-r-blue-white rounded-r-lg border-collapse text-left p-5 text-primary-color"
+          >
             <button
               (click)="deleteStudent(student.id)"
               class="hover:cursor-pointer p-2"
@@ -74,12 +103,15 @@
               <img
                 ngSrc="assets/delete.png"
                 alt="delete"
-                height="75"
-                width="75"
+                height="30"
+                width="30"
               />
             </button>
-            <button (click)="updateStudent(student)" class="hover:cursor-pointer p-2">
-              <img ngSrc="assets/edit.png" alt="edit" height="75" width="75" />
+            <button
+              (click)="updateStudent(student)"
+              class="hover:cursor-pointer p-2"
+            >
+              <img ngSrc="assets/edit.png" alt="edit" height="30" width="30" />
             </button>
           </td>
         </tr>
@@ -87,6 +119,10 @@
       </tbody>
     </table>
   </section>
-  } }
-  <app-modal [showModal]="showModal" [student]="student" (close)="closeModal()" />
+  }
+  <app-modal
+    [showModal]="showModal"
+    [student]="student"
+    (close)="closeModal()"
+  />
 </main>
