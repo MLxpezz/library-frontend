@@ -16,5 +16,5 @@ export const environment = {
   getInfoLoans: 'http://localhost:8080/api/loans/get-info-loans',
   createLoan: 'http://localhost:8080/api/loans/create',
   updateLoan: 'http://localhost:8080/api/loans/update/',
-  deleteLoan: 'http://localhost:8080/api/loans/delete/',
+  returnLoan: 'http://localhost:8080/api/loans/return-book/'
 };

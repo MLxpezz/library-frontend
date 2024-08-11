@@ -1,0 +1,65 @@
+@if(showModal && loanInfo) {
+<section
+  class="w-screen h-screen absolute top-0 left-0 bottom-0 right-0 m-auto flex items-center justify-center bg-gray-400 backdrop:blur-sm bg-opacity-50"
+>
+  <div class="w-[30%] bg-white p-10 pt-5 pb-8">
+    <h4 class="text-blue-medio-strong text-center mb-4 text-[30px]">
+      Editar prestamo
+    </h4>
+    <article class="p-5 flex items-center justify-center">
+      <div class="flex flex-col items-start justify-center gap-1">
+        <p class="text-blue-strong">{{ loanInfo.bookTitle }}</p>
+        <section class="flex gap-1">
+          <p class="text-primary-color font-bold">Alumno:</p>
+          <p class="text-primary-color">{{ loanInfo.studentName }}</p>
+        </section>
+        <section class="flex gap-1">
+          <p class="text-primary-color font-bold">Fecha de devolucion:</p>
+          <p class="text-primary-color">
+            {{ loanInfo.returningDate }}
+          </p>
+        </section>
+        <section class="flex gap-1">
+          <p class="text-primary-color font-bold">
+            Dias pasados de la devolucion:
+          </p>
+          <p class="text-primary-color">
+            {{ loanInfo.daysAfterReturningDate }}
+          </p>
+        </section>
+        <section class="flex gap-1">
+          <p class="text-primary-color font-bold">
+            Deuda por devolucion tardia:
+          </p>
+          <p class="text-primary-color">${{ loanInfo.penaltyAmount }}</p>
+        </section>
+      </div>
+    </article>
+    <div class="flex items-center justify-between mb-6 gap-1">
+      <button
+        class="flex-1 bg-blue-medio-strong text-white p-2 hover:outline hover:outline-1 hover:outline-blue-medio-strong hover:bg-white hover:text-blue-medio-strong"
+      >
+        Extender fecha
+      </button>
+      <p
+        class="flex-1 p-2 font-bold text-primary-color text-center outline outline-1 outline-primary-color"
+      >
+        {{ loanInfo.returningDate }}
+      </p>
+    </div>
+    <button
+      (click)="returnLoan()"
+      class="w-full bg-blue-medio-strong text-white p-2 hover:outline hover:outline-1 hover:outline-blue-medio-strong hover:bg-white hover:text-blue-medio-strong"
+    >
+      Libro devuelto
+    </button>
+    <button
+      class="mt-3 w-full border border-blue-medio-strong text-blue-medio-strong p-2 hover:bg-blue-medio-strong hover:text-white"
+      type="button"
+      (click)="hideModal()"
+    >
+      Cancelar
+    </button>
+  </div>
+</section>
+}

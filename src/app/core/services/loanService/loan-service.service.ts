@@ -35,4 +35,12 @@ export class LoanService {
         }
       })
     }
+
+    returnLoan(idLoan: number) {
+      return this.http.delete<string>(`${environment.returnLoan}${idLoan}`, {
+        headers: {
+          Authorization: `Bearer ${this.token}`
+        }
+      })
+    }
 }

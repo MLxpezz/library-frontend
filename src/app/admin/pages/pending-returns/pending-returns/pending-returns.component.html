@@ -2,11 +2,13 @@
   <section class="w-full flex items-center justify-between">
     <h2 class="text-[36px] text-blue-medio">Devoluciones pendientes</h2>
     <div class="w-[60%] flex justify-end items-center gap-9">
+      @if(loansInfoList && loansInfoList.length > 0) {
       <div class="w-[50%] relative">
         <input
           type="text"
           placeholder="Nombre del estudiante.."
           class="w-full border-2 border-blue-white p-1 pl-3 rounded-xl placeholder:p-1 placeholder:text-primary-color outline-none text-primary-color"
+          [(ngModel)]="studentName"
         />
         <div
           class="absolute bg-blue-white w-[80px] h-full rounded-xl right-0 top-0 flex items-center justify-center"
@@ -18,6 +20,7 @@
           />
         </div>
       </div>
+      }
       <a routerLink="/dashboard">
         <button
           class="flex items-center justify-center w-[150px] h-full bg-primary-color text-blue-white font-bold p-1 rounded-[10px] hover:bg-white hover:border-2 hover:border-blue-white hover:text-primary-color"
@@ -28,11 +31,11 @@
       </a>
     </div>
   </section>
-  @if(loansInfo | async; as results) {
+  @if(loansInfoList && loansInfoList.length > 0) {
   <section
     class="w-full mt-10 grid grid-cols-4 items-center justify-between gap-8"
   >
-    @for(loan of results; track loan.idLoan) {
+    @for(loan of filterLoansByStudentName(); track loan.idLoan) {
     <article
       class="border-2 border-blue-white p-5 flex items-center justify-between rounded-[7px]"
     >
@@ -63,11 +66,16 @@
           <p class="text-primary-color">${{ loan.penaltyAmount }}</p>
         </section>
       </div>
-      <button (click)="updateLoan(loan.idLoan)">
+      <button (click)="openModal(loan)">
         <img src="assets/edit.png" alt="edit" />
       </button>
     </article>
     }
   </section>
   }
+  <app-modal-pending-returns
+    [showModal]="showModal"
+    [loanInfo]="loanInfo"
+    (closeModal)="closeModal()"
+  />
 </main>

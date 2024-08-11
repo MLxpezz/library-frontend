@@ -2,6 +2,7 @@
   <section class="w-full flex items-center justify-between">
     <h2 class="text-[36px] text-blue-medio">Inventario</h2>
     <div class="w-full flex justify-end items-center gap-9">
+      @if(books && books.length > 0) {
       <div class="w-[35%] relative">
         <input
           type="text"
@@ -15,6 +16,7 @@
           <img class="hover:cursor-pointer" [src]="searchButton" alt="search" />
         </div>
       </div>
+      }
       <button
         (click)="openModal()"
         class="w-[150px] bg-primary-color text-blue-white font-bold p-1 rounded-[10px] hover:bg-white hover:border-2 hover:border-blue-white hover:text-primary-color"

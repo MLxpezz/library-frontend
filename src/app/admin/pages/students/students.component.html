@@ -2,6 +2,7 @@
   <section class="w-full flex items-center justify-between">
     <h2 class="text-[36px] text-blue-medio">Estudiantes</h2>
     <div class="w-full flex justify-end items-center gap-9">
+      @if(students && students.length > 0) {
       <div class="w-[35%] relative">
         <input
           type="text"
@@ -19,6 +20,7 @@
           />
         </div>
       </div>
+      }
       <button
         class="flex items-center justify-center gap-[5px] w-auto bg-primary-color text-blue-white font-bold p-1 pr-2 pl-2 rounded-[10px] hover:outline hover:outline-2 hover:outline-blue-white hover:bg-white hover:text-primary-color"
         (click)="openModal()"
