@@ -14,7 +14,8 @@
         El correo ya existe.
     </p>
   }
-  <div class="w-full">
+  <div class="w-full relative">
+    <img class="absolute right-0" src="assets/user-icon.png" alt="user">
     <input
       type="text"
       placeholder="Correo"
@@ -27,9 +28,10 @@
     <p class="text-red-600 p-0 m-0">El correo no es valido.</p>
     }
   </div>
-  <div class="w-full">
+  <div class="w-full relative">
+    <img (click)="changeInputType()" class="absolute right-0 cursor-pointer" src="{{!changeInput ? 'assets/password-icon.png' : 'assets/text-icon.png'}}" alt="password" height="25" width="25">
     <input
-      type="password"
+      type="{{!changeInput ? 'password' : 'text'}}"
       placeholder="Contraseña"
       class="w-full border-b-2 border-blue-strong placeholder:text-blue-medio text-sm outline-none text-blue-medio font-bold p-1 mb-2"
       formControlName="password"
@@ -45,7 +47,7 @@
   <button
     type="submit"
     class="bg-blue-medio-strong text-blue-white font-extrabold p-2 rounded-lg hover:bg-blue-medio hover:cursor-pointer"
-  
+    [disabled]="!authForm.valid"
   >
     {{ submitButtonText }}
   </button>

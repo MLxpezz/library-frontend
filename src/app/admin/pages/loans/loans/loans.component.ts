@@ -5,11 +5,12 @@ import { LoanService } from '../../../../core/services/loanService/loan-service.
 import { Observable } from 'rxjs';
 import { LoanResponse } from '../../../../interfaces/loan';
 import { AsyncPipe, NgOptimizedImage } from '@angular/common';
+import { CardLoansComponent } from '../../../../components/card-loans/card-loans.component';
 
 @Component({
   selector: 'app-loans',
   standalone: true,
-  imports: [RouterLink, ModalLoansComponent, AsyncPipe, NgOptimizedImage],
+  imports: [RouterLink, ModalLoansComponent, AsyncPipe, NgOptimizedImage, CardLoansComponent],
   templateUrl: './loans.component.html',
   styleUrl: './loans.component.css',
 })

@@ -7,7 +7,7 @@ import {
 import { MatInputModule } from '@angular/material/input';
 import { Observable, startWith, map } from 'rxjs';
 import { BookService } from '../../../core/services/bookService/book-service.service';
-import { AsyncPipe, NgClass, NgForOf } from '@angular/common';
+import { AsyncPipe, NgClass, NgForOf, NgOptimizedImage } from '@angular/common';
 import { StudentService } from '../../../core/services/studentService/student.service';
 import { Student } from '../../../interfaces/student';
 import { Book } from '../../../interfaces/book';
@@ -25,7 +25,8 @@ import { Router } from '@angular/router';
     AsyncPipe,
     MatOption,
     NgForOf,
-    NgClass
+    NgClass, 
+    NgOptimizedImage
   ],
   templateUrl: './modal-loans.component.html',
   styleUrl: './modal-loans.component.css',
@@ -59,7 +60,7 @@ export class ModalLoansComponent {
     });
 
     this.bookService.getBooks().subscribe((books) => {
-      this.books = books.map((book) => book);
+      this.books = books.filter((book) => book.quantity > 0);
     });
 
     this.filteredBooks = this.loansForm.controls['title'].valueChanges.pipe(

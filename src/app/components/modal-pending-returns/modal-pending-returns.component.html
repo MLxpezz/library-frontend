@@ -6,8 +6,8 @@
     <h4 class="text-blue-medio-strong text-center mb-4 text-[30px]">
       Editar prestamo
     </h4>
-    <article class="p-5 flex items-center justify-center">
-      <div class="flex flex-col items-start justify-center gap-1">
+    <article class="p-5 flex items-center justify-center text-center">
+      <div class="flex flex-col items-center justify-center gap-1">
         <p class="text-blue-strong">{{ loanInfo.bookTitle }}</p>
         <section class="flex gap-1">
           <p class="text-primary-color font-bold">Alumno:</p>
@@ -38,13 +38,14 @@
     <div class="flex items-center justify-between mb-6 gap-1">
       <button
         class="flex-1 bg-blue-medio-strong text-white p-2 hover:outline hover:outline-1 hover:outline-blue-medio-strong hover:bg-white hover:text-blue-medio-strong"
+        (click)="extendReturnDate()"
       >
         Extender fecha
       </button>
       <p
         class="flex-1 p-2 font-bold text-primary-color text-center outline outline-1 outline-primary-color"
       >
-        {{ loanInfo.returningDate }}
+        Nueva fecha: {{ newDate.toISOString().split('T')[0] }}
       </p>
     </div>
     <button

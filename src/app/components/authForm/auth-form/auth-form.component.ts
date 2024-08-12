@@ -18,12 +18,17 @@ import { Register } from '../../../interfaces/register';
   styleUrl: './auth-form.component.css',
 })
 export class AuthFormComponent {
+  @Input() submitButtonText!: string;
+
   userService: UserService = inject(UserService);
   router: Router = inject(Router);
+
   badCredentials: boolean = false;
   emailIsAlreadyExists: boolean = false;
+  changeInput: boolean = false
+  inputType: string = "password"
+  urlIcon: string = `assets/text-icon.png`
 
-  @Input() submitButtonText!: string;
 
   isLoginRoute(): boolean {
     return this.router.url === '/login';
@@ -85,5 +90,9 @@ export class AuthFormComponent {
     }
 
     this.register(userData as Register);
+  }
+
+  changeInputType() {
+    this.changeInput = !this.changeInput
   }
 }
