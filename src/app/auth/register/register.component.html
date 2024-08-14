@@ -1,12 +1,31 @@
-<main class="flex items-center justify-between relative">
-  <section class="w-1/2 h-screen relative">
-    <img [ngSrc]="imgUrl" alt="image" class="h-screen w-full" fill priority />
+<main class="flex items-center justify-between relative overflow-hidden">
+  <section #elementTransport Transport class="w-1/2 h-screen relative z-30">
+    <img
+      [ngSrc]="imgUrl"
+      alt="image"
+      class="h-screen w-full relative"
+      fill
+      priority
+    />
   </section>
-  <section class="flex flex-col w-1/2 relative">
+  <section
+    Fade
+    TransportTo
+    #elementTransportTo
+    class="flex flex-col w-1/2 relative z-0"
+  >
     <div class="text-start m-auto w-1/2">
       <h2 class="text-blue-medio-strong text-[37px] font-bold">Nueva cuenta</h2>
     </div>
 
-    <app-auth-form submitButtonText="Crear cuenta"/>
+    <app-auth-form submitButtonText="Crear cuenta" />
+    @if(!isLoginRoute()) {
+    <p class="w-[50%] m-auto text-blue-medio text-start mt-2">
+      ¿Ya tienes cuenta?,
+      <a routerLink="/login" class="font-extrabold"
+        >Iniciar sesion</a
+      >
+    </p>
+    }
   </section>
 </main>

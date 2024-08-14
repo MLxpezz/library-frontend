@@ -11,36 +11,45 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-inventory',
   standalone: true,
-  imports: [CardInventoryComponent, RouterLink, AsyncPipe, ModalInventoryComponent, FormsModule],
+  imports: [
+    CardInventoryComponent,
+    RouterLink,
+    AsyncPipe,
+    ModalInventoryComponent,
+    FormsModule,
+  ],
   templateUrl: './inventory.component.html',
-  styleUrl: './inventory.component.css'
+  styleUrl: './inventory.component.css',
 })
 export class InventoryComponent {
-
   private bookService: BookService = inject(BookService);
   books!: Book[];
 
   bookToUpdate!: Book | null;
 
-  bookTitleText = "";
-  searchButton: string = "assets/icons8-search-book-48 1.png";
+  bookTitleText = '';
+  searchButton: string = 'assets/icons8-search-book-48 1.png';
   showModal: boolean = false;
 
   ngOnInit(): void {
-    this.bookService.getBooks().subscribe({
-      next: books => {
-        this.books = books.map(book => book);
-      }
-    })
+    this.loadBooks();
   }
 
   filteredBooks() {
-    if(this.bookTitleText === "") {
+    if (this.bookTitleText === '') {
       return this.books;
     }
-    return this.books.filter(book => {
+    return this.books.filter((book) => {
       return book.title.toLowerCase().startsWith(this.bookTitleText);
-    })
+    });
+  }
+
+  loadBooks() {
+    this.bookService.getBooks().subscribe({
+      next: (books) => {
+        this.books = books.map((book) => book);
+      },
+    });
   }
 
   openModal() {
@@ -56,5 +65,4 @@ export class InventoryComponent {
     this.bookToUpdate = event$;
     this.openModal();
   }
-  
 }

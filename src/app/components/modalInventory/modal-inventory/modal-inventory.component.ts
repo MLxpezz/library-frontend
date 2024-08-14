@@ -25,6 +25,7 @@ import { Book, BookPost } from '../../../interfaces/book';
 export class ModalInventoryComponent {
   @Input() showModal!: boolean;
   @Output() close: EventEmitter<void> = new EventEmitter<void>();
+  @Output() updateBooks: EventEmitter<void> = new EventEmitter<void>();
   @Input() book!: Book | null;
 
   bookService: BookService = inject(BookService);
@@ -67,6 +68,7 @@ export class ModalInventoryComponent {
       next: (response) => {
         this.hideModal();
         this.clearForm();
+        this.updateBooks.emit();
         console.log(response);
       },
     });
@@ -74,12 +76,13 @@ export class ModalInventoryComponent {
 
   updateBook(book: Book) {
     this.bookService.updateBook(book).subscribe({
-      next: response => {
+      next: (response) => {
         this.hideModal();
         this.clearForm();
+        this.updateBooks.emit();
         console.log(response);
-      }
-    })
+      },
+    });
   }
 
   onSubmit() {
@@ -90,8 +93,8 @@ export class ModalInventoryComponent {
       quantity: this.bookForm.controls['quantity'].value,
     };
 
-    if(this.book) {
-      this.updateBook({...book, id: this.book.id});
+    if (this.book) {
+      this.updateBook({ ...book, id: this.book.id });
     } else {
       this.createBook(book);
     }

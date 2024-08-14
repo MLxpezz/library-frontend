@@ -1,0 +1,65 @@
+<table class="w-full border-separate" style="border-spacing: 0 25px">
+  <thead class="">
+    <tr class="">
+      <th class="border-collapse text-left p-5 text-blue-strong">ID</th>
+      <th class="border-collapse text-left p-5 text-blue-strong">Nombre</th>
+      <th class="border-collapse text-left p-5 text-blue-strong">Matricula</th>
+      <th class="border-collapse text-left p-5 text-blue-strong">Telefono</th>
+      <th class="border-collapse text-left p-5 text-blue-strong">Direccion</th>
+      <th class="border-collapse text-left p-5 text-blue-strong">Prestamos</th>
+      <th class="border-collapse text-left p-5 text-blue-strong">Acciones</th>
+    </tr>
+  </thead>
+  <tbody class="">
+    @for(student of students; track student.id) {
+    <tr class="hover:bg-blue-white hover:rounded-xl">
+      <td
+        class="border-l-2 border-l-blue-white border-b-2 border-b-blue-white border-t-2 border-t-blue-white rounded-l-lg border-collapse text-left p-5 text-primary-color"
+      >
+        {{ student.id }}
+      </td>
+      <td
+        class="border-b-2 border-b-blue-white border-t-2 border-t-blue-white border-collapse text-left p-5 text-primary-color"
+      >
+        {{ student.name }} {{ student.lastname }}
+      </td>
+      <td
+        class="border-b-2 border-b-blue-white border-t-2 border-t-blue-white border-collapse text-left p-5 text-primary-color"
+      >
+        {{ student.enrollmentNumber }}
+      </td>
+      <td
+        class="border-b-2 border-b-blue-white border-t-2 border-t-blue-white border-collapse text-left p-5 text-primary-color"
+      >
+        {{ student.phone }}
+      </td>
+      <td
+        class="border-b-2 border-b-blue-white border-t-2 border-t-blue-white border-collapse text-left p-5 text-primary-color"
+      >
+        {{ student.address }}
+      </td>
+      <td
+        class="border-b-2 border-b-blue-white border-t-2 border-t-blue-white border-collapse text-left p-5 text-primary-color"
+      >
+        {{ student.countLoans }}
+      </td>
+      <td
+        class="border-b-2 border-b-blue-white border-t-2 border-t-blue-white border-r-2 border-r-blue-white rounded-r-lg border-collapse text-left p-5 text-primary-color"
+      >
+        <button
+          (click)="deleteStudent(student.id)"
+          class="hover:cursor-pointer p-2"
+        >
+          <img ngSrc="assets/delete.png" alt="delete" height="30" width="30" />
+        </button>
+        <button
+          (click)="updateStudent(student)"
+          class="hover:cursor-pointer p-2"
+        >
+          <img ngSrc="assets/edit.png" alt="edit" height="30" width="30" />
+        </button>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>

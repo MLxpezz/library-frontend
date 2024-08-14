@@ -13,13 +13,12 @@ export class ModalPendingReturnsComponent {
   @Input() showModal!: boolean;
   @Input() loanInfo!: LoanInfo;
   @Output() closeModal: EventEmitter<void> = new EventEmitter<void>();
+  @Output() updateLoans: EventEmitter<void> = new EventEmitter<void>();
 
   loanService: LoanService = inject(LoanService);
   newDate!: Date;
 
   ngOnChanges(changes: SimpleChanges): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
     if(changes['loanInfo'] && changes['loanInfo'].currentValue) {
       this.newDate = new Date(this.loanInfo.returningDate)
       this.newDate.setDate(this.newDate.getDate() + 7)
@@ -37,6 +36,7 @@ export class ModalPendingReturnsComponent {
         next: (response) => {
           console.log(response);
           this.hideModal();
+          this.updateLoans.emit();
         },
       });
   }
@@ -54,7 +54,8 @@ export class ModalPendingReturnsComponent {
         .subscribe({
           next: (response) => {
             console.log(response);
-            this.hideModal()
+            this.hideModal();
+            this.updateLoans.emit();
           },
         });
   }

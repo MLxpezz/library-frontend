@@ -4,11 +4,12 @@ import { InventoryComponent } from '../inventory/inventory.component';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../../core/services/authService/auth-service.service';
 import { LoaderComponent } from '../../../components/loader/loader.component';
+import { FadeDirective } from '../../../components/directives/fade/fade.directive';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CardComponent, InventoryComponent, LoaderComponent, RouterOutlet, RouterLink],
+  imports: [CardComponent, InventoryComponent, LoaderComponent, RouterOutlet, RouterLink, FadeDirective],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })

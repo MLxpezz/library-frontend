@@ -14,6 +14,7 @@ export class CardInventoryComponent {
 
   @Input() book!: Book;
   @Output() bookSelected: EventEmitter<Book> = new EventEmitter<Book>();
+  @Output() updateBooks: EventEmitter<void> = new EventEmitter<void>();
 
   bookService: BookService = inject(BookService);
 
@@ -21,6 +22,7 @@ export class CardInventoryComponent {
     if(confirm("¿Seguro que quieres eliminar este libro?"))
     this.bookService.deleteBook(idBook).subscribe({
       next: response => {
+        this.updateBooks.emit()
         console.log(response);
       }
     })

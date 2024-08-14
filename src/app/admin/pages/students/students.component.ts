@@ -5,11 +5,19 @@ import { ModalComponent } from '../../../components/modal/modal.component';
 import { StudentService } from '../../../core/services/studentService/student.service';
 import { Student } from '../../../interfaces/student';
 import { FormsModule } from '@angular/forms';
+import { TableStudentsComponent } from '../../../components/tableStudents/table-students.component';
 
 @Component({
   selector: 'app-students',
   standalone: true,
-  imports: [RouterLink, AsyncPipe, ModalComponent, NgOptimizedImage, FormsModule],
+  imports: [
+    RouterLink,
+    AsyncPipe,
+    ModalComponent,
+    NgOptimizedImage,
+    FormsModule,
+    TableStudentsComponent,
+  ],
   templateUrl: './students.component.html',
   styleUrl: './students.component.css',
 })
@@ -17,24 +25,28 @@ export class StudentsComponent {
   private studentService: StudentService = inject(StudentService);
   public students!: Student[];
 
-  studentNameText = "";
+  studentNameText = '';
 
   ngOnInit(): void {
+    this.loadStudents();
+  }
+
+  loadStudents() {
     this.studentService.getAllStudents().subscribe({
-      next: students => {
-        this.students = students.map(student => student)
-      }
-    })
+      next: (students) => {
+        this.students = students.map((student) => student);
+      },
+    });
   }
 
   filterStudentsByName() {
-    if(this.studentNameText === "") {
-      return this.students
+    if (this.studentNameText === '') {
+      return this.students;
     }
-    return this.students.filter(student => {
-      let fullname = `${student.name} ${student.lastname}`
-      return fullname.toLowerCase().startsWith(this.studentNameText)
-    })
+    return this.students.filter((student) => {
+      let fullname = `${student.name} ${student.lastname}`;
+      return fullname.toLowerCase().startsWith(this.studentNameText);
+    });
   }
 
   showModal: boolean = false;
@@ -49,16 +61,7 @@ export class StudentsComponent {
     this.showModal = false;
   }
 
-  deleteStudent(idStudent: number) {
-    if (confirm('Estas seguro que quieres eliminar este estudiante?'))
-      this.studentService.deleteStudent(idStudent).subscribe({
-        next: (response) => {
-          console.log(response);
-        },
-      });
-  }
-
-  updateStudent(student: Student) {
+  updateStudent(student: any) {
     this.student = student;
     this.openModal();
   }

@@ -18,12 +18,16 @@ export class PendingReturnsComponent {
   loanService: LoanService = inject(LoanService);
   loansInfo: Observable<LoanInfo[]> = this.loanService.getInfoLoans();
 
-  studentName: string = "";
+  studentName: string = '';
   loansInfoList!: LoanInfo[];
   showModal: boolean = true;
   loanInfo!: LoanInfo;
 
   ngOnInit(): void {
+    this.loadLoans();
+  }
+
+  loadLoans() {
     this.loanService.getInfoLoans().subscribe({
       next: (loans) => {
         this.loansInfoList = loans.map((loan) => loan);
@@ -32,11 +36,11 @@ export class PendingReturnsComponent {
   }
 
   filterLoansByStudentName() {
-    if (this.studentName === "") {
+    if (this.studentName === '') {
       return this.loansInfoList;
     }
-    return this.loansInfoList.filter(
-      (loan) => loan.studentName.toLowerCase().startsWith(this.studentName.toLowerCase())
+    return this.loansInfoList.filter((loan) =>
+      loan.studentName.toLowerCase().startsWith(this.studentName.toLowerCase())
     );
   }
 

@@ -25,6 +25,7 @@ import {
 export class ModalComponent {
   @Input() showModal!: boolean;
   @Output() close = new EventEmitter<void>();
+  @Output() updateStudents: EventEmitter<void> = new EventEmitter<void>();
   @Input() student!: Student | null;
 
   studentService: StudentService = inject(StudentService);
@@ -94,6 +95,7 @@ export class ModalComponent {
       next: (data) => {
         this.clearFormAndStudent();
         this.hideModal();
+        this.updateStudents.emit();
       },
     });
   }
@@ -103,6 +105,7 @@ export class ModalComponent {
       next: (response) => {
         this.clearFormAndStudent();
         this.hideModal();
+        this.updateStudents.emit();
       },
     });
   }
