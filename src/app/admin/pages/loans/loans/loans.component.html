@@ -23,7 +23,7 @@
     class="w-full mt-10 grid loan-repeat gap-5 items-center justify-between"
   >
     @for(loan of results; track loan) {
-      <app-card-loans [loan]="loan"/>
+    <app-card-loans Fade [durationAnimation]="0.5" [loan]="loan" />
     }
   </section>
   }

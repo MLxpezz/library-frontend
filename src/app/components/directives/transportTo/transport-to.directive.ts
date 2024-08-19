@@ -1,5 +1,5 @@
 import { AnimationBuilder, style, animate } from '@angular/animations';
-import { Directive, ElementRef, HostListener, inject, Input } from '@angular/core';
+import { Directive, ElementRef, inject } from '@angular/core';
 
 @Directive({
   selector: '[TransportTo]',
@@ -11,14 +11,12 @@ export class TransportToDirective {
 
   private player = this.builder
     .build([
-      style([{ transform: 'translateX(-100%)'}]),
-      animate('0.6s', style({ transform: 'translateX(0)' })),
+      style([{ transform: 'translateX(-100%)' }]),
+      animate('0.6s ease-in-out', style({ transform: 'translateX(0)' })),
     ])
     .create(this.elementRef.nativeElement);
 
-    ngOnInit(): void {
-      //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-      //Add 'implements OnInit' to the class.
-      this.player.play()
-    }
+  ngOnInit(): void {
+    this.player.play();
+  }
 }

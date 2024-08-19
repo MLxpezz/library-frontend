@@ -1,5 +1,5 @@
 <main class="flex items-center justify-between relative overflow-hidden">
-  <section #elementTransport Transport class="w-1/2 h-screen relative z-30">
+  <section Transport class="w-1/2 h-screen relative z-30">
     <img
       [ngSrc]="imgUrl"
       alt="image"
@@ -8,12 +8,7 @@
       priority
     />
   </section>
-  <section
-    Fade
-    TransportTo
-    #elementTransportTo
-    class="flex flex-col w-1/2 relative z-0"
-  >
+  <section Fade TransportTo class="flex flex-col w-1/2 relative z-0">
     <div class="text-start m-auto w-1/2">
       <h2 class="text-blue-medio-strong text-[37px] font-bold">Nueva cuenta</h2>
     </div>
@@ -22,7 +17,7 @@
     @if(!isLoginRoute()) {
     <p class="w-[50%] m-auto text-blue-medio text-start mt-2">
       ¿Ya tienes cuenta?,
-      <a routerLink="/login" class="font-extrabold"
+      <a routerLink="/login" class="font-extrabold hover:text-blue-medio-strong"
         >Iniciar sesion</a
       >
     </p>

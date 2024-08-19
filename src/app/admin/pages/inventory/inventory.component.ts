@@ -2,11 +2,11 @@ import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CardInventoryComponent } from '../../../components/card-inventory/card-inventory.component';
 import { BookService } from '../../../core/services/bookService/book-service.service';
-import { Observable } from 'rxjs';
 import { Book } from '../../../interfaces/book';
 import { AsyncPipe } from '@angular/common';
 import { ModalInventoryComponent } from '../../../components/modalInventory/modal-inventory/modal-inventory.component';
 import { FormsModule } from '@angular/forms';
+import { FadeDirective } from '../../../components/directives/fade/fade.directive';
 
 @Component({
   selector: 'app-inventory',
@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
     AsyncPipe,
     ModalInventoryComponent,
     FormsModule,
+    FadeDirective
   ],
   templateUrl: './inventory.component.html',
   styleUrl: './inventory.component.css',

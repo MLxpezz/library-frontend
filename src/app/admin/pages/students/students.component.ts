@@ -6,6 +6,7 @@ import { StudentService } from '../../../core/services/studentService/student.se
 import { Student } from '../../../interfaces/student';
 import { FormsModule } from '@angular/forms';
 import { TableStudentsComponent } from '../../../components/tableStudents/table-students.component';
+import { FadeDirective } from '../../../components/directives/fade/fade.directive';
 
 @Component({
   selector: 'app-students',
@@ -17,6 +18,7 @@ import { TableStudentsComponent } from '../../../components/tableStudents/table-
     NgOptimizedImage,
     FormsModule,
     TableStudentsComponent,
+    FadeDirective
   ],
   templateUrl: './students.component.html',
   styleUrl: './students.component.css',

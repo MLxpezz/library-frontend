@@ -9,11 +9,13 @@ import { Login } from '../../../interfaces/Login';
 import { UserService } from '../../../core/services/userService/user-service.service';
 import { Router, RouterLink } from '@angular/router';
 import { Register } from '../../../interfaces/register';
+import { TransportToDirective } from '../../directives/transportTo/transport-to.directive';
+
 
 @Component({
   selector: 'app-auth-form',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, TransportToDirective],
   templateUrl: './auth-form.component.html',
   styleUrl: './auth-form.component.css',
 })
@@ -24,11 +26,11 @@ export class AuthFormComponent {
   router: Router = inject(Router);
 
   badCredentials: boolean = false;
+  successRegister: boolean = false;
   emailIsAlreadyExists: boolean = false;
-  changeInput: boolean = false
-  inputType: string = "password"
-  urlIcon: string = `assets/text-icon.png`
-
+  changeInput: boolean = false;
+  inputType: string = 'password';
+  urlIcon: string = `assets/text-icon.png`;
 
   isLoginRoute(): boolean {
     return this.router.url === '/login';
@@ -59,7 +61,7 @@ export class AuthFormComponent {
         }
       },
       error: (error) => {
-        console.error('Fallo en el inicio de sesion', error);       
+        console.error('Fallo en el inicio de sesion', error);
         this.badCredentials = true;
       },
     });
@@ -68,12 +70,16 @@ export class AuthFormComponent {
   private register(userData: Register) {
     this.userService.userRegister(userData).subscribe({
       next: (data) => {
-        this.router.navigate(['/login']);
         this.emailIsAlreadyExists = false;
+        this.successRegister = true;
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 2500);
       },
       error: (error) => {
         console.error('Fallo en el registro', error);
         this.emailIsAlreadyExists = true;
+        this.successRegister = false;
       },
     });
   }
@@ -84,7 +90,7 @@ export class AuthFormComponent {
       password: this.password.value,
     };
 
-    if(this.isLoginRoute()) {
+    if (this.isLoginRoute()) {
       this.login(userData as Login);
       return;
     }
@@ -93,6 +99,6 @@ export class AuthFormComponent {
   }
 
   changeInputType() {
-    this.changeInput = !this.changeInput
+    this.changeInput = !this.changeInput;
   }
 }

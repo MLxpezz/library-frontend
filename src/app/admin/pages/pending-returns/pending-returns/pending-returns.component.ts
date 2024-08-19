@@ -6,11 +6,12 @@ import { LoanService } from '../../../../core/services/loanService/loan-service.
 import { AsyncPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ModalPendingReturnsComponent } from '../../../../components/modal-pending-returns/modal-pending-returns.component';
+import { FadeDirective } from '../../../../components/directives/fade/fade.directive';
 
 @Component({
   selector: 'app-pending-returns',
   standalone: true,
-  imports: [RouterLink, AsyncPipe, FormsModule, ModalPendingReturnsComponent],
+  imports: [RouterLink, AsyncPipe, FormsModule, ModalPendingReturnsComponent, FadeDirective],
   templateUrl: './pending-returns.component.html',
   styleUrl: './pending-returns.component.css',
 })

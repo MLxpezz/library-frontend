@@ -41,6 +41,8 @@
   @if(students && students.length > 0) {
   <section class="mt-10 w-full">
     <app-table-students
+      Fade
+      [durationAnimation]="0.5"
       (studentToUpdate)="updateStudent($event)"
       (updateStudents)="loadStudents()"
       [students]="filterStudentsByName()"

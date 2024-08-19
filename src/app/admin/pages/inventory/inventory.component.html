@@ -38,7 +38,7 @@
     class="w-full grid book-repeat justify-center items-center gap-7 mt-11"
   >
     @for(book of filteredBooks(); track book.id) {
-    <app-card-inventory [book]="book" (bookSelected)="receptEmitter($event)" (updateBooks)="loadBooks()"/>
+    <app-card-inventory Fade [durationAnimation]="0.5" [book]="book" (bookSelected)="receptEmitter($event)" (updateBooks)="loadBooks()"/>
     }
   </section>
   }

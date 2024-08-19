@@ -6,11 +6,12 @@ import { Observable } from 'rxjs';
 import { LoanResponse } from '../../../../interfaces/loan';
 import { AsyncPipe, NgOptimizedImage } from '@angular/common';
 import { CardLoansComponent } from '../../../../components/card-loans/card-loans.component';
+import { FadeDirective } from '../../../../components/directives/fade/fade.directive';
 
 @Component({
   selector: 'app-loans',
   standalone: true,
-  imports: [RouterLink, ModalLoansComponent, AsyncPipe, NgOptimizedImage, CardLoansComponent],
+  imports: [RouterLink, ModalLoansComponent, AsyncPipe, NgOptimizedImage, CardLoansComponent, FadeDirective],
   templateUrl: './loans.component.html',
   styleUrl: './loans.component.css',
 })

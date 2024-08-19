@@ -1,8 +1,6 @@
 <header class="w-4/5 flex items-center justify-between m-auto mt-16 flex-wrap">
   <h1 class="text-4xl text-primary-color">
-    <a routerLink="/dashboard">
-      Sistema Bibliotecario
-    </a>
+    <a routerLink="/dashboard"> Sistema Bibliotecario </a>
   </h1>
   <nav class="flex items-center w-[40%] relative">
     <input
@@ -44,7 +42,7 @@
   class="w-[80%] grid grid-repeat items-center justify-between gap-20 mt-10 m-auto"
 >
   @for(info of listCardsInfo; track info.areaName) {
-  <app-card [infoCard]="info" />
+  <app-card Fade [durationAnimation]="0.5" [infoCard]="info" />
   }
 </main>
 }
