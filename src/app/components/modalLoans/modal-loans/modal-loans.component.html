@@ -71,6 +71,11 @@
           }
         </mat-autocomplete>
         <div class="w-full flex flex-col gap-4">
+          @if(studentHasMaximunLoans) {
+            <p class="text-red-500">
+              El alumno ya tiene el maximo de prestamos permitidos
+            </p>
+          }
           <button
             class="w-full bg-blue-medio-strong text-white p-2 hover:cursor-pointer hover:bg-white hover:outline-1 hover:outline hover:outline-blue-medio-strong hover:text-blue-medio-strong"
             [disabled]="!loansForm.valid"

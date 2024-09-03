@@ -40,6 +40,8 @@ export class ModalLoansComponent {
   loanService: LoanService = inject(LoanService);
   router: Router = inject(Router);
 
+  studentHasMaximunLoans: boolean = false;
+
   loansForm: FormGroup = new FormGroup({
     title: new FormControl('', Validators.required),
     student: new FormControl('', Validators.required),
@@ -106,6 +108,7 @@ export class ModalLoansComponent {
     this.showModal = false;
     this.clearForm();
     this.closeModal.emit();
+    this.studentHasMaximunLoans = false;
   }
 
   clearForm() {
@@ -124,7 +127,11 @@ export class ModalLoansComponent {
     this.loanService.createLoan(dataLoan).subscribe({
       next: response => {
         this.clearForm();
-        this.router.navigate(["/dashboard/pending-returns"])
+        this.router.navigate(["/dashboard/pending-returns"]);
+        this.studentHasMaximunLoans = false;
+      },
+      error: error => {
+        this.studentHasMaximunLoans = true;
       }
     });
   }

@@ -1,9 +1,10 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-error-page',
   standalone: true,
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './error-page.component.html',
   styleUrl: './error-page.component.css'
 })
