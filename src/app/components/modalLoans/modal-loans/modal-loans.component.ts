@@ -14,6 +14,7 @@ import { Book } from '../../../interfaces/book';
 import { LoanService } from '../../../core/services/loanService/loan-service.service';
 import { LoanPost } from '../../../interfaces/loan';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-modal-loans',
@@ -40,7 +41,8 @@ export class ModalLoansComponent {
   loanService: LoanService = inject(LoanService);
   router: Router = inject(Router);
 
-  studentHasMaximunLoans: boolean = false;
+  studentErrorResponse: boolean = false;
+  errorMessageResponse!: string;
 
   loansForm: FormGroup = new FormGroup({
     title: new FormControl('', Validators.required),
@@ -108,7 +110,7 @@ export class ModalLoansComponent {
     this.showModal = false;
     this.clearForm();
     this.closeModal.emit();
-    this.studentHasMaximunLoans = false;
+    this.studentErrorResponse = false;
   }
 
   clearForm() {
@@ -126,12 +128,12 @@ export class ModalLoansComponent {
 
     this.loanService.createLoan(dataLoan).subscribe({
       next: response => {
-        this.clearForm();
+        this.hideModal();
         this.router.navigate(["/dashboard/pending-returns"]);
-        this.studentHasMaximunLoans = false;
       },
-      error: error => {
-        this.studentHasMaximunLoans = true;
+      error: (error: HttpErrorResponse) => {
+        this.errorMessageResponse = error.toString();
+        this.studentErrorResponse = true;
       }
     });
   }

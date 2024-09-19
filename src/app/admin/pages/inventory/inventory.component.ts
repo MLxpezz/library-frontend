@@ -4,7 +4,7 @@ import { CardInventoryComponent } from '../../../components/card-inventory/card-
 import { BookService } from '../../../core/services/bookService/book-service.service';
 import { Book } from '../../../interfaces/book';
 import { AsyncPipe } from '@angular/common';
-import { ModalInventoryComponent } from '../../../components/modalInventory/modal-inventory/modal-inventory.component';
+import { ModalInventoryComponent } from '../../../components/modalInventory/modal-inventory.component';
 import { FormsModule } from '@angular/forms';
 import { FadeDirective } from '../../../components/directives/fade/fade.directive';
 

@@ -71,9 +71,9 @@
           }
         </mat-autocomplete>
         <div class="w-full flex flex-col gap-4">
-          @if(studentHasMaximunLoans) {
-            <p class="text-red-500">
-              El alumno ya tiene el maximo de prestamos permitidos
+          @if(studentErrorResponse) {
+            <p class="text-red-500 p-0 m-0">
+              {{errorMessageResponse}}
             </p>
           }
           <button

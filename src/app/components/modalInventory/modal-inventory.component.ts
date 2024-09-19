@@ -12,8 +12,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { BookService } from '../../../core/services/bookService/book-service.service';
-import { Book, BookPost } from '../../../interfaces/book';
+import { BookService } from '../../core/services/bookService/book-service.service';
+import { Book, BookPost } from '../../interfaces/book';
 
 @Component({
   selector: 'app-modal-inventory',

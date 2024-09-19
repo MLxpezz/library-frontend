@@ -40,12 +40,12 @@ export class DashboardComponent {
     },
     {
       areaName: "Devoluciones pendientes",
-      imgUrl: "assets/book.png",
+      imgUrl: "assets/pending-book.png",
       pageUrl: "/dashboard/pending-returns"
     },
     {
       areaName: "Prestamos",
-      imgUrl: "assets/inventory.png",
+      imgUrl: "assets/book.png",
       pageUrl: "/dashboard/loans"
     }
   ];

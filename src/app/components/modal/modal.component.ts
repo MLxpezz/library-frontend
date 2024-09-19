@@ -28,6 +28,8 @@ export class ModalComponent {
   @Output() updateStudents: EventEmitter<void> = new EventEmitter<void>();
   @Input() student!: Student | null;
 
+  errorMessage!: string;
+
   studentService: StudentService = inject(StudentService);
 
   ngOnChanges(changes: SimpleChanges) {
@@ -97,6 +99,9 @@ export class ModalComponent {
         this.hideModal();
         this.updateStudents.emit();
       },
+      error: error => {
+        this.errorMessage = error.mensaje.toString();
+      }
     });
   }
 

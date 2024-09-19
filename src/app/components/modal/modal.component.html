@@ -2,9 +2,13 @@
 <section
   class="w-screen h-screen absolute top-0 left-0 bottom-0 right-0 m-auto flex items-center justify-center bg-gray-400 backdrop:blur-sm bg-opacity-50"
 >
-  <div class="w-[30%] h-auto bg-blue-strong flex flex-col items-center justify-end rounded-t-2xl pt-5">
-    <div class="bg-blue-medio-strong border border-blue-strong rounded-[50%] p-5 flex items-center justify-center mb-5">
-      <img src="assets/student-icon.png" alt="student">
+  <div
+    class="w-[30%] h-auto bg-blue-strong flex flex-col items-center justify-end rounded-t-2xl pt-5"
+  >
+    <div
+      class="bg-blue-medio-strong border border-blue-strong rounded-[50%] p-5 flex items-center justify-center mb-5"
+    >
+      <img src="assets/student-icon.png" alt="student" />
     </div>
     <div class="w-full bg-white p-3 pt-8 pb-8 rounded-t-[20px]">
       <form
@@ -50,7 +54,9 @@
             placeholder="Correo electronico"
             formControlName="email"
           />
-          @if(studentForm.controls['email'].hasError('required') &&
+          @if(errorMessage) {
+          <p class="text-red-500">{{ errorMessage }}</p>
+          } @if(studentForm.controls['email'].hasError('required') &&
           studentForm.controls['email'].touched) {
           <p class="text-red-500 text-[12px]">El campo correo es requerido.</p>
           } @if(studentForm.controls['email'].hasError('email')) {
@@ -107,7 +113,7 @@
             type="submit"
             [disabled]="!studentForm.valid"
           >
-            {{student ? 'Editar' : 'Registrar'}}
+            {{ student ? "Editar" : "Registrar" }}
           </button>
           <button
             class="w-full border border-blue-medio-strong text-blue-medio-strong p-2 hover:bg-blue-medio-strong hover:text-white"

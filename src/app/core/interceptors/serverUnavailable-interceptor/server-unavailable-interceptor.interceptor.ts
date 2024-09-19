@@ -11,7 +11,10 @@ export const ServerUnavailableInterceptor: HttpInterceptorFn = (req, next) => {
     if(error.status === 0 || error.status === 503) {
       router.navigate(["/service-down"]);
     }
-    return throwError(() => new Error(error.message));
+    if(error.status === 422) {
+      return throwError(() => error.error)
+    }
+    return throwError(() => error.error);
   }));
   
 };
