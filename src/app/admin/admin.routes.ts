@@ -5,6 +5,7 @@ import { InventoryComponent } from './pages/inventory/inventory.component';
 import { StudentsComponent } from './pages/students/students.component';
 import { LoansComponent } from './pages/loans/loans/loans.component';
 import { PendingReturnsComponent } from './pages/pending-returns/pending-returns/pending-returns.component';
+import { AccountComponent } from './pages/account/account.component';
 
 export const ADMIN_ROUTES: Routes = [
   {
@@ -31,6 +32,11 @@ export const ADMIN_ROUTES: Routes = [
         component: PendingReturnsComponent,
         canActivate: [authGuard]
       },
+      {
+        path: 'account',
+        component: AccountComponent,
+        canActivate: [authGuard]
+      }
     ],
   },
 ];
