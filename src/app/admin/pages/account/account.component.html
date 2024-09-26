@@ -1,4 +1,4 @@
-<main class="w-[80%] m-auto mt-10 flex flex-col justify-center items-center">
+<main Fade [durationAnimation]="0.5" class="w-[80%] m-auto mt-10 flex flex-col justify-center items-center">
   <section class="w-full flex items-center justify-between">
     <h2 class="text-[36px] text-blue-medio">Mi cuenta</h2>
     <div class="flex gap-9">
@@ -17,77 +17,178 @@
       <p class="text-blue-strong text-[20px] font-bold mb-2">Mi informacion</p>
       <div>
         <div class="flex gap-3 mb-2">
-          <p>Correo:</p>
-          <input
-            type="text"
-            disabled
-            placeholder="micorreo@gmail.com"
-            class="border-b border-b-blue-strong"
-          />
+          <div>
+            <p>Correo</p>
+            <input
+              type="text"
+              disabled
+              placeholder="micorreo@gmail.com"
+              class="border-b border-b-blue-strong outline-none"
+            />
+          </div>
+          @if(canEditInfo) {
+          <div>
+            <p>Nueva contraseña</p>
+            <input
+              type="password"
+              class="border-b border-b-blue-strong outline-none"
+            />
+          </div>
+          <div>
+            <p>Contraseña actual</p>
+            <input
+              type="password"
+              class="border-b border-b-blue-strong outline-none"
+            />
+          </div>
+          }
         </div>
         <button
-          class="bg-primary-color text-blue-white font-bold p-2 hover:bg-white hover:border hover:border-primary-color hover:text-blue-strong"
+          (click)="editInfo()"
+          class="mr-3 bg-primary-color text-blue-white font-bold p-2 hover:bg-white hover:outline hover:outline-1 hover:outline-primary-color hover:text-blue-strong"
         >
-          Editar mi informacion
+          {{textButton}}
         </button>
+        @if(canEditInfo) {
+        <button
+          class="bg-primary-color text-blue-white font-bold p-2 hover:bg-white hover:outline hover:outline-1 hover:outline-primary-color hover:text-blue-strong"
+        >
+          Aceptar
+        </button>
+        }
       </div>
     </div>
-    <div class="w-[100%]">
-      <p class="text-blue-strong text-[20px] font-bold mb-2">
-        Historial de prestamos
-      </p>
-      <div class="flex flex-col">
-        <p class="text-blue-strong text-[16px] font-bold mb-2">Fecha</p>
+    <div class="w-[100%] flex items-start justify-between">
+      <div class="w-[50%]">
+        <p class="text-blue-strong text-[20px] font-bold mb-2">
+          Historial de prestamos devueltos
+        </p>
+        <div class="flex flex-col">
+          <p class="text-blue-strong text-[16px] font-bold mb-2">Fecha</p>
+          <div class="flex gap-2">
+            <input
+              class="border border-blue-strong"
+              type="date"
+              name=""
+              id=""
+            />
+            <button
+              class="w-[10%] bg-primary-color text-blue-white font-bold p-2 hover:bg-white hover:outline hover:outline-1 hover:outline-primary-color hover:text-blue-strong"
+            >
+              Buscar
+            </button>
+          </div>
+          <div class="mt-7 w-[100%] h-[300px] overflow-y-auto">
+            <table class="w-[100%] border-separate">
+              <thead>
+                <tr>
+                  <th class="border-collapse text-left text-blue-strong">
+                    Titulo del libro
+                  </th>
+                  <th class="border-collapse text-left text-blue-strong">
+                    Matricula alumno
+                  </th>
+                  <th class="border-collapse text-left text-blue-strong">
+                    Fecha de prestamo
+                  </th>
+                  <th class="border-collapse text-left text-blue-strong">
+                    Fecha de devolucion
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td
+                    class="border-collapse text-left text-blue-medio-strong font-bold"
+                  >
+                    Viaje al centro de la tierra
+                  </td>
+                  <td
+                    class="border-collapse text-left text-blue-medio-strong font-bold"
+                  >
+                    S22302120
+                  </td>
+                  <td
+                    class="border-collapse text-left text-blue-medio-strong font-bold"
+                  >
+                    19/09/2024
+                  </td>
+                  <td
+                    class="border-collapse text-left text-blue-medio-strong font-bold"
+                  >
+                    23/09/2024
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="w-[50%] pl-5">
+        <p class="text-blue-strong text-[20px] font-bold mb-2">
+          Alumnos con deuda por devolucion tardia
+        </p>
+        <p class="text-blue-strong text-[16px] font-bold mb-2">
+          Nombre del alumno
+        </p>
         <div class="flex gap-2">
-          <input type="date" name="" id="" />
+          <input
+            class="border border-blue-strong outline-none"
+            type="text"
+            name=""
+            id=""
+            placeholder="Nombre del alumno"
+          />
           <button
-            class="w-[10%] bg-primary-color text-blue-white font-bold p-2 hover:bg-white hover:border hover:border-primary-color hover:text-blue-strong"
+            class="w-[10%] bg-primary-color text-blue-white font-bold p-2 hover:bg-white hover:outline hover:outline-1 hover:outline-primary-color hover:text-blue-strong"
           >
             Buscar
           </button>
         </div>
-        <table class="w-[50%] mt-10 border-separate border">
-          <thead>
-            <tr>
-              <th class="border-collapse text-left text-blue-strong">
-                Titulo del libro
-              </th>
-              <th class="border-collapse text-left text-blue-strong">
-                Matricula alumno
-              </th>
-              <th class="border-collapse text-left text-blue-strong">
-                Fecha de prestamo
-              </th>
-              <th class="border-collapse text-lef text-blue-strong">
-                Fecha de devolucion
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td
-                class="border-collapse text-left text-blue-medio-strong font-bold"
-              >
-                Viaje al centro de la tierra
-              </td>
-              <td
-                class="border-collapse text-left text-blue-medio-strong font-bold"
-              >
-                S22302120
-              </td>
-              <td
-                class="border-collapse text-left text-blue-medio-strong font-bold"
-              >
-                19/09/2024
-              </td>
-              <td
-                class="border-collapse text-left text-blue-medio-strong font-bold"
-              >
-                23/09/2024
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="mt-7 w-[100%] h-[300px] overflow-y-auto">
+          <table class="w-[100%] border-separate">
+            <thead>
+              <tr>
+                <th class="border-collapse text-left text-blue-strong">
+                  Matricula alumno
+                </th>
+                <th class="border-collapse text-left text-blue-strong">
+                  Nombre completo
+                </th>
+                <th class="border-collapse text-left text-blue-strong">
+                  Titulo del libro
+                </th>
+                <th class="border-collapse text-left text-blue-strong">
+                  Deuda
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td
+                  class="border-collapse text-left text-blue-medio-strong font-bold"
+                >
+                  S2402424
+                </td>
+                <td
+                  class="border-collapse text-left text-blue-medio-strong font-bold"
+                >
+                  Mauricio Lopez
+                </td>
+                <td
+                  class="border-collapse text-left text-blue-medio-strong font-bold"
+                >
+                  El castillo en el cielo
+                </td>
+                <td
+                  class="border-collapse text-left text-blue-medio-strong font-bold"
+                >
+                  $4.00
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </section>
