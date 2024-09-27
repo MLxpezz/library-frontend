@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment.development';
 import { Login, LoginResponse } from '../../../interfaces/Login';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { Register } from '../../../interfaces/register';
+import { infoAccount } from '../../../interfaces/account';
 
 @Injectable({
   providedIn: 'root',
@@ -34,5 +35,13 @@ export class UserService {
         return throwError(() => new Error(error.message))
       })
     );
+  }
+
+  getInfoAccount(): Observable<infoAccount> {
+    return this._http.get<infoAccount>(environment.getInfoAccount, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token") ?? ""}`
+      }
+    })
   }
 }

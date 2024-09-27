@@ -1,6 +1,7 @@
 export const environment = {
   registerUrl: 'http://localhost:8080/api/users/register',
   loginUrl: 'http://localhost:8080/api/users/login',
+  getInfoAccount: "http://localhost:8080/api/users/info",
   validateToken: 'http://localhost:8080/api/users/validate-token',
   getStudents: 'http://localhost:8080/api/students/get-all',
   getStudentById: 'http://localhost:8080/api/students/get/',
@@ -16,5 +17,6 @@ export const environment = {
   getInfoLoans: 'http://localhost:8080/api/loans/get-info-loans',
   createLoan: 'http://localhost:8080/api/loans/create',
   updateLoan: 'http://localhost:8080/api/loans/update/',
-  returnLoan: 'http://localhost:8080/api/loans/return-book/'
+  returnLoan: 'http://localhost:8080/api/loans/return-book/',
+  getHistory: 'http://localhost:8080/api/history/get-all'
 };
