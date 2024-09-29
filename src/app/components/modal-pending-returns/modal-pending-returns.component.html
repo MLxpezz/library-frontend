@@ -8,30 +8,30 @@
     </h4>
     <article class="p-5 flex items-center justify-center text-center">
       <div class="flex flex-col items-center justify-center gap-1">
-        <p class="text-blue-strong">{{ loanInfo.bookTitle }}</p>
+        <p class="text-blue-strong font-bold">{{ loanInfo.bookTitle }}</p>
         <section class="flex gap-1">
-          <p class="text-primary-color font-bold">Alumno:</p>
-          <p class="text-primary-color">{{ loanInfo.studentName }}</p>
+          <p class="text-blue-medio-strong font-bold">Alumno:</p>
+          <p class="text-blue-medio-strong">{{ loanInfo.studentName }}</p>
         </section>
         <section class="flex gap-1">
-          <p class="text-primary-color font-bold">Fecha de devolucion:</p>
-          <p class="text-primary-color">
+          <p class="text-blue-medio-strong font-bold">Fecha de devolucion:</p>
+          <p class="text-blue-medio-strong">
             {{ loanInfo.returningDate }}
           </p>
         </section>
         <section class="flex gap-1">
-          <p class="text-primary-color font-bold">
+          <p class="text-blue-medio-strong font-bold">
             Dias pasados de la devolucion:
           </p>
-          <p class="text-primary-color">
+          <p class="text-blue-medio-strong">
             {{ loanInfo.daysAfterReturningDate }}
           </p>
         </section>
         <section class="flex gap-1">
-          <p class="text-primary-color font-bold">
+          <p class="text-blue-medio-strong font-bold">
             Deuda por devolucion tardia:
           </p>
-          <p class="text-primary-color">${{ loanInfo.penaltyAmount }}</p>
+          <p class="text-blue-medio-strong">${{ loanInfo.penaltyAmount }}</p>
         </section>
       </div>
     </article>

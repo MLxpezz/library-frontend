@@ -1,8 +1,8 @@
 <article
-  class="w-full h-[225px] border-2 border-blue-white rounded-xl shadow-lg shadow-blue-light p-4 m-auto"
+  class="w-full h-[225px] border-4 border-blue-white rounded-xl shadow-lg shadow-blue-medio-strong p-4 m-auto hover:scale-105 hover:shadow-blue-medio-strong hover:shadow-xl transition-all"
 >
   <a class="w-full h-full flex flex-col items-center justify-center" [routerLink]="infoCard.pageUrl">
     <img class="m-auto" [ngSrc]="infoCard.imgUrl" [alt]="infoCard.areaName" width="130" height="117" priority/>
-    <p class="text-primary-color text-[20px]">{{ infoCard.areaName }}</p>
+    <p class="text-blue-medio-strong text-[20px]">{{ infoCard.areaName }}</p>
   </a>
 </article>

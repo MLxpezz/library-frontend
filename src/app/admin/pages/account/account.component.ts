@@ -6,12 +6,24 @@ import { LoanHistory } from '../../../interfaces/loanHistory';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { UserService } from '../../../core/services/userService/user-service.service';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-account',
   standalone: true,
-  imports: [RouterLink, FadeDirective, AsyncPipe, ReactiveFormsModule],
+  imports: [
+    RouterLink,
+    FadeDirective,
+    AsyncPipe,
+    ReactiveFormsModule,
+    FormsModule,
+  ],
   templateUrl: './account.component.html',
   styleUrl: './account.component.css',
 })
@@ -23,31 +35,67 @@ export class AccountComponent {
   private loanHistoryService: HistoryService = inject(HistoryService);
   private userService: UserService = inject(UserService);
 
-  loanHistoryArray: Observable<LoanHistory[]> =
-    this.loanHistoryService.getHistoryLoans();
   email!: string;
+  auxEmail!: string;
+  loansArray: LoanHistory[] = [];
 
   accountForm: FormGroup = new FormGroup({
-    email: new FormControl(''), // Inicializamos vacía
-    password: new FormControl(''),
-    newPassword: new FormControl(''),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required]),
+    newPassword: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
   });
 
+  loanDate!: Date | null;
+
   ngOnInit(): void {
-    // Aquí obtenemos el email
     this.userService.getInfoAccount().subscribe({
       next: (data) => {
         this.email = data.email;
-        console.log(this.email);
+        this.auxEmail = data.email;
 
-        // Actualizamos el valor del control 'email' después de obtener los datos
         this.accountForm.patchValue({
           email: this.email,
         });
       },
     });
 
-    this.accountForm.controls["email"].disable();
+    this.accountForm.controls['email'].disable();
+    this.fillArray();
+  }
+
+  fillArray() {
+    this.loanHistoryService.getHistoryLoans().subscribe({
+      next: (loansHistory) => {
+        this.loansArray = loansHistory.map((loan) => loan);
+      },
+    });
+  }
+
+  searchLoanDate() {
+    if(this.loanDate) {
+      return this.loansArray.filter(loan => loan.startLoanDate === this.loanDate);
+    }
+    return this.loansArray;
+  }
+
+  clearLoansDate() {
+    this.loanDate = null;
+  }
+
+  onSubmit() {
+    console.log('hola');
+    console.log(this.accountForm.value);
+  }
+
+  clearForm() {
+    this.accountForm.reset({
+      email: this.auxEmail,
+      password: '',
+      newPassword: '',
+    });
   }
 
   editInfo() {
@@ -56,10 +104,11 @@ export class AccountComponent {
 
     if (this.canEditInfo) {
       this.textButton = 'Cancelar';
-      this.accountForm.controls["email"].enable();
+      this.accountForm.controls['email'].enable();
     } else {
       this.textButton = 'Editar mi informacion';
-      this.accountForm.controls["email"].disable();
+      this.accountForm.controls['email'].disable();
+      this.clearForm();
     }
   }
 }

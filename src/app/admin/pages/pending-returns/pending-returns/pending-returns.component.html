@@ -42,30 +42,30 @@
       class="border-2 border-blue-white p-5 flex items-center justify-between rounded-[7px]"
     >
       <div class="flex flex-col items-start justify-center gap-1">
-        <p class="text-blue-strong">{{ loan.bookTitle }}</p>
+        <p class="text-blue-strong font-bold">{{ loan.bookTitle }}</p>
         <section class="flex gap-1">
-          <p class="text-primary-color font-bold">Alumno:</p>
-          <p class="text-primary-color">{{ loan.studentName }}</p>
+          <p class="text-blue-medio-strong font-bold">Alumno:</p>
+          <p class="text-blue-medio-strong">{{ loan.studentName }}</p>
         </section>
         <section class="flex gap-1">
-          <p class="text-primary-color font-bold">Fecha de devolucion:</p>
-          <p class="text-primary-color">
+          <p class="text-blue-medio-strong font-bold">Fecha de devolucion:</p>
+          <p class="text-blue-medio-strong">
             {{ loan.returningDate }}
           </p>
         </section>
         <section class="flex gap-1">
-          <p class="text-primary-color font-bold">
+          <p class="text-blue-medio-strong font-bold">
             Dias pasados de la devolucion:
           </p>
-          <p class="text-primary-color">
+          <p class="text-blue-medio-strong">
             {{ loan.daysAfterReturningDate }}
           </p>
         </section>
         <section class="flex gap-1">
-          <p class="text-primary-color font-bold">
+          <p class="text-blue-medio-strong font-bold">
             Deuda por devolucion tardia:
           </p>
-          <p class="text-primary-color">${{ loan.penaltyAmount }}</p>
+          <p class="text-blue-medio-strong">${{ loan.penaltyAmount }}</p>
         </section>
       </div>
       <button (click)="openModal(loan)">
