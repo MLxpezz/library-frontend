@@ -4,7 +4,7 @@ import { environment } from '../../../../environments/environment.development';
 import { Login, LoginResponse } from '../../../interfaces/Login';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { Register } from '../../../interfaces/register';
-import { infoAccount } from '../../../interfaces/account';
+import { accountData, infoAccount, updateAccountData } from '../../../interfaces/account';
 
 @Injectable({
   providedIn: 'root',
@@ -37,11 +37,29 @@ export class UserService {
     );
   }
 
-  getInfoAccount(): Observable<infoAccount> {
-    return this._http.get<infoAccount>(environment.getInfoAccount, {
+  getInfoAccount(): Observable<accountData> {
+    return this._http.get<accountData>(environment.getInfoAccount, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token") ?? ""}`
       }
     })
   }
+
+  updateAccount(id: number, accountData: updateAccountData): Observable<LoginResponse> {
+    return this._http.put<LoginResponse>(`${environment.updateUserAccount}/${id}`, accountData, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token") ?? ""}`
+      }
+    }).pipe(
+      map((response) => {
+  
+        if (response.isSuccess) {
+          localStorage.setItem('token', response.token);
+        }
+  
+        return response;
+      })
+    );
+  }
+  
 }

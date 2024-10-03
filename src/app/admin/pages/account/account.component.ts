@@ -13,6 +13,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { updateAccountData } from '../../../interfaces/account';
 
 @Component({
   selector: 'app-account',
@@ -31,39 +32,47 @@ export class AccountComponent {
   canEditInfo: boolean = false;
   buttonDisabled: boolean = true;
   textButton: string = 'Editar mi informacion';
+  successMessage: string = "Cuenta actualizada con exito.";
 
   private loanHistoryService: HistoryService = inject(HistoryService);
   private userService: UserService = inject(UserService);
 
   email!: string;
-  auxEmail!: string;
+  auxAcc!: any;
+  errorMessage!: string;
+  success!: boolean;
+  errorFlag!: boolean;
   loansArray: LoanHistory[] = [];
 
   accountForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
-    newPassword: new FormControl('', [
-      Validators.required,
-      Validators.minLength(8),
-    ]),
+    newPassword: new FormControl('', [Validators.minLength(8)]),
   });
 
   loanDate!: Date | null;
 
   ngOnInit(): void {
+    this.getInfoAccount()
+    this.accountForm.controls['email'].disable();
+    this.fillArray();
+  }
+
+  getInfoAccount() {
     this.userService.getInfoAccount().subscribe({
       next: (data) => {
         this.email = data.email;
-        this.auxEmail = data.email;
+
+        this.auxAcc = {
+          email: data.email,
+          id: data.id
+        };
 
         this.accountForm.patchValue({
           email: this.email,
         });
       },
     });
-
-    this.accountForm.controls['email'].disable();
-    this.fillArray();
   }
 
   fillArray() {
@@ -75,8 +84,10 @@ export class AccountComponent {
   }
 
   searchLoanDate() {
-    if(this.loanDate) {
-      return this.loansArray.filter(loan => loan.startLoanDate === this.loanDate);
+    if (this.loanDate) {
+      return this.loansArray.filter(
+        (loan) => loan.startLoanDate === this.loanDate
+      );
     }
     return this.loansArray;
   }
@@ -85,14 +96,34 @@ export class AccountComponent {
     this.loanDate = null;
   }
 
-  onSubmit() {
-    console.log('hola');
-    console.log(this.accountForm.value);
+  onSubmit() {  
+    const newUser: updateAccountData = { ...this.accountForm.value };
+
+    this.userService.updateAccount(this.auxAcc.id, newUser).subscribe({
+      next: (response) => {
+        this.showAndHideSuccessMessage();
+        this.errorFlag = false;
+        this.editInfo();
+        this.getInfoAccount();
+      },
+      error: (error) => {
+        this.errorFlag = true;
+        this.success = false;
+        this.errorMessage = error;
+      },
+    });
+  }
+
+  showAndHideSuccessMessage() {
+    this.success = true;
+    setTimeout(() => {
+      this.success = false;
+    }, 1500);
   }
 
   clearForm() {
     this.accountForm.reset({
-      email: this.auxEmail,
+      email: this.auxAcc.email,
       password: '',
       newPassword: '',
     });

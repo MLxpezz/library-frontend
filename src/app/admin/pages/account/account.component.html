@@ -29,11 +29,11 @@
                 formControlName="email"
                 class="border-b border-b-blue-strong outline-none"
               />
-              @if(accountForm.controls['email'].hasError('required') && accountForm.controls['email'].touched) {
-                <p class="text-red-500 text-[14px]">El campo es requerido.</p>
-              }
-              @if(accountForm.controls['email'].hasError('email')) {
-                <p class="text-red-500 text-[14px]">El correo no es valido.</p>
+              @if(accountForm.controls['email'].hasError('required') &&
+              accountForm.controls['email'].touched) {
+              <p class="text-red-500 text-[14px]">El campo es requerido.</p>
+              } @if(accountForm.controls['email'].hasError('email')) {
+              <p class="text-red-500 text-[14px]">El correo no es valido.</p>
               }
             </div>
             @if(canEditInfo) {
@@ -44,11 +44,8 @@
                 formControlName="newPassword"
                 class="border-b border-b-blue-strong outline-none"
               />
-              @if(accountForm.controls['newPassword'].hasError('required') && accountForm.controls['newPassword'].touched) {
-                <p class="text-red-500 text-[14px]">El campo es requerido.</p>
-              }
               @if(accountForm.controls['newPassword'].hasError('minlength')) {
-                <p class="text-red-500 text-[14px]">minimo 8 caracteres.</p>
+              <p class="text-red-500 text-[14px]">minimo 8 caracteres.</p>
               }
             </div>
             <div>
@@ -58,12 +55,19 @@
                 formControlName="password"
                 class="border-b border-b-blue-strong outline-none"
               />
-              @if(accountForm.controls['password'].hasError('required') && accountForm.controls['password'].touched) {
-                <p class="text-red-500 text-[14px]">El campo es requerido.</p>
+              @if(accountForm.controls['password'].hasError('required') &&
+              accountForm.controls['password'].touched) {
+              <p class="text-red-500 text-[14px]">El campo es requerido.</p>
               }
             </div>
             }
           </div>
+          @if(errorFlag) {
+          <p class="text-red-500 text-[16px] mb-2">{{ errorMessage }}</p>
+          }
+          @if(success) {
+            <p class="text-green-600 text-[16px] mb-2">{{ successMessage }}</p>
+          }
           <button
             (click)="editInfo()"
             type="button"
@@ -89,21 +93,32 @@
       </p>
       @if(loansArray.length > 0) {
       <div class="flex flex-col">
-        <label class="text-blue-strong text-[16px] font-bold mb-2" for="loanDate">Fecha</label>
+        <label
+          class="text-blue-strong text-[16px] font-bold mb-2"
+          for="loanDate"
+          >Fecha</label
+        >
         <div class="flex gap-2">
-          <input class="border border-blue-strong" type="date" id="loanDate" [(ngModel)]="loanDate"/>
+          <input
+            class="border border-blue-strong"
+            type="date"
+            id="loanDate"
+            [(ngModel)]="loanDate"
+          />
           <button
-          (click)="searchLoanDate()"
-            class=" bg-primary-color text-blue-white font-bold p-2 hover:bg-white hover:outline hover:outline-1 hover:outline-primary-color hover:text-blue-strong"
+            (click)="searchLoanDate()"
+            class="bg-primary-color text-blue-white font-bold p-2 hover:bg-white hover:outline hover:outline-1 hover:outline-primary-color hover:text-blue-strong"
           >
             Buscar
           </button>
+          @if(loanDate) {
           <button
-          (click)="clearLoansDate()"
-            class=" bg-primary-color text-blue-white font-bold p-2 hover:bg-white hover:outline hover:outline-1 hover:outline-primary-color hover:text-blue-strong"
+            (click)="clearLoansDate()"
+            class="bg-primary-color text-blue-white font-bold p-2 hover:bg-white hover:outline hover:outline-1 hover:outline-primary-color hover:text-blue-strong"
           >
             Reiniciar busqueda
           </button>
+          }
         </div>
         <div class="mt-7 w-[100%] h-[300px] overflow-y-auto">
           <table class="w-[100%] border-separate">
@@ -156,7 +171,7 @@
       <p class="text-blue-strong text-[16px] font-bold mb-2">
         Aun no se ha devuelto algun prestamo.
       </p>
-      } 
+      }
     </div>
   </section>
 </main>

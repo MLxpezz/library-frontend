@@ -2,6 +2,7 @@ export const environment = {
   registerUrl: 'http://localhost:8080/api/users/register',
   loginUrl: 'http://localhost:8080/api/users/login',
   getInfoAccount: "http://localhost:8080/api/users/info",
+  updateUserAccount: "http://localhost:8080/api/users/update",
   validateToken: 'http://localhost:8080/api/users/validate-token',
   getStudents: 'http://localhost:8080/api/students/get-all',
   getStudentById: 'http://localhost:8080/api/students/get/',
